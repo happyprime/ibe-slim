@@ -7,14 +7,12 @@ import classnames from 'classnames';
  * WordPress dependencies
  */
 import {
+	BlockCanvas,
 	BlockList,
 	BlockTools,
-	store as blockEditorStore,
 	__unstableUseTypewriter as useTypewriter,
 	__experimentalUseResizeCanvas as useResizeCanvas,
-	useSetting,
 	__experimentalRecursionProvider as RecursionProvider,
-	privateApis as blockEditorPrivateApis,
 // @ts-ignore
 } from '@wordpress/block-editor';
 import { useEffect, useRef, useMemo } from '@wordpress/element';
@@ -34,50 +32,6 @@ const isGutenbergPlugin = true;
  */
 import EditorHeading from '../editor-heading-slot';
 import FooterSlot from '../footer-slot';
-import { unlock } from './unlock';
-
-
-const {
-	LayoutStyle,
-	useLayoutClasses,
-	useLayoutStyles,
-	ExperimentalBlockCanvas: BlockCanvas,
-} = unlock( blockEditorPrivateApis );
-
-/**
- * Given an array of nested blocks, find the first Post Content
- * block inside it, recursing through any nesting levels,
- * and return its attributes.
- *
- * @param {Array} blocks A list of blocks.
- *
- * @return {Object | undefined} The Post Content block.
- */
-function getPostContentAttributes( blocks ) {
-	for ( let i = 0; i < blocks.length; i++ ) {
-		if ( blocks[ i ].name === 'core/post-content' ) {
-			return blocks[ i ].attributes;
-		}
-		if ( blocks[ i ].innerBlocks.length ) {
-			const nestedPostContent = getPostContentAttributes(
-				blocks[ i ].innerBlocks
-			);
-
-			if ( nestedPostContent ) {
-				return nestedPostContent;
-			}
-		}
-	}
-}
-
-function checkForPostContentAtRootLevel( blocks ) {
-	for ( let i = 0; i < blocks.length; i++ ) {
-		if ( blocks[ i ].name === 'core/post-content' ) {
-			return true;
-		}
-	}
-	return false;
-}
 
 /**
  * This is a copy of packages/edit-post/src/components/visual-editor/index.js
@@ -92,8 +46,6 @@ export default function VisualEditor( { styles } ) {
 		deviceType,
 		isWelcomeGuideVisible,
 		isTemplateMode,
-		postContentAttributes,
-		editedPostTemplate = {},
 		wrapperBlockName,
 		wrapperUniqueId,
 		// @ts-ignore
@@ -139,19 +91,7 @@ export default function VisualEditor( { styles } ) {
 	// @ts-ignore
 	const { isCleanNewPost } = useSelect( editorStore );
 	const hasMetaBoxes = false;
-	const {
-		themeHasDisabledLayoutStyles,
-		themeSupportsLayout,
-	} = useSelect( ( select ) => {
-		const _settings = select( blockEditorStore ).getSettings();
-		return {
-			themeHasDisabledLayoutStyles: _settings.disableLayoutStyles,
-			themeSupportsLayout: _settings.supportsLayout,
-			isFocusMode: _settings.focusMode,
-			hasRootPaddingAwareAlignments:
-				_settings.__experimentalFeatures?.useRootPaddingAwareAlignments,
-		};
-	}, [] );
+
 	const desktopCanvasStyles = {
 		height: '100%',
 		width: '100%',
@@ -170,7 +110,6 @@ export default function VisualEditor( { styles } ) {
 		borderBottom: 0,
 	};
 	const resizedCanvasStyles = useResizeCanvas( deviceType, isTemplateMode );
-	const globalLayoutSettings = useSetting( 'layout' );
 	const previewMode = 'is-' + deviceType.toLowerCase() + '-preview';
 
 	let animatedStyles = isTemplateMode
@@ -190,128 +129,6 @@ export default function VisualEditor( { styles } ) {
 
 	const ref = useRef();
 	const contentRef = useMergeRefs( [ ref, useTypewriter() ] );
-
-	// fallbackLayout is used if there is no Post Content,
-	// and for Post Title.
-	const fallbackLayout = useMemo( () => {
-		if ( isTemplateMode ) {
-			return { type: 'default' };
-		}
-
-		if ( themeSupportsLayout ) {
-			// We need to ensure support for wide and full alignments,
-			// so we add the constrained type.
-			return { ...globalLayoutSettings, type: 'constrained' };
-		}
-		// Set default layout for classic themes so all alignments are supported.
-		return { type: 'default' };
-	}, [ isTemplateMode, themeSupportsLayout, globalLayoutSettings ] );
-
-	const newestPostContentAttributes = useMemo( () => {
-		// @ts-ignore
-		if ( ! editedPostTemplate?.content && ! editedPostTemplate?.blocks ) {
-			return postContentAttributes;
-		}
-		// When in template editing mode, we can access the blocks directly.
-		// @ts-ignore
-		if ( editedPostTemplate?.blocks ) {
-			// @ts-ignore
-			return getPostContentAttributes( editedPostTemplate?.blocks );
-		}
-		// If there are no blocks, we have to parse the content string.
-		// Best double-check it's a string otherwise the parse function gets unhappy.
-		// @ts-ignore
-		const parseableContent =
-			// @ts-ignore
-			typeof editedPostTemplate?.content === 'string'
-				// @ts-ignore
-				? editedPostTemplate?.content
-				: '';
-
-		// @ts-ignore
-		return getPostContentAttributes( parse( parseableContent ) ) || {};
-	}, [
-		// @ts-ignore
-		editedPostTemplate?.content,
-		// @ts-ignore
-		editedPostTemplate?.blocks,
-		postContentAttributes,
-	] );
-
-	const hasPostContentAtRootLevel = useMemo( () => {
-		// @ts-ignore
-		if ( ! editedPostTemplate?.content && ! editedPostTemplate?.blocks ) {
-			return false;
-		}
-		// When in template editing mode, we can access the blocks directly.
-		// @ts-ignore
-		if ( editedPostTemplate?.blocks ) {
-			// @ts-ignore
-			return checkForPostContentAtRootLevel( editedPostTemplate?.blocks );
-		}
-		// If there are no blocks, we have to parse the content string.
-		// Best double-check it's a string otherwise the parse function gets unhappy.
-		const parseableContent =
-			// @ts-ignore
-			typeof editedPostTemplate?.content === 'string'
-				// @ts-ignore
-				? editedPostTemplate?.content
-				: '';
-
-		return (
-			checkForPostContentAtRootLevel( parse( parseableContent ) ) || false
-		);
-	// @ts-ignore
-	}, [ editedPostTemplate?.content, editedPostTemplate?.blocks ] );
-
-	const { layout = {}, align = '' } = newestPostContentAttributes || {};
-
-	const postContentLayoutClasses = useLayoutClasses(
-		newestPostContentAttributes,
-		'core/post-content'
-	);
-
-	const blockListLayoutClass = classnames(
-		{
-			'is-layout-flow': ! themeSupportsLayout,
-		},
-		themeSupportsLayout && postContentLayoutClasses,
-		align && `align${ align }`
-	);
-
-	const postContentLayoutStyles = useLayoutStyles(
-		newestPostContentAttributes,
-		'core/post-content',
-		'.block-editor-block-list__layout.is-root-container'
-	);
-
-	// Update type for blocks using legacy layouts.
-	const postContentLayout = useMemo( () => {
-		return layout &&
-			( layout?.type === 'constrained' ||
-				layout?.inherit ||
-				layout?.contentSize ||
-				layout?.wideSize )
-			? { ...globalLayoutSettings, ...layout, type: 'constrained' }
-			: { ...globalLayoutSettings, ...layout, type: 'default' };
-	}, [
-		layout?.type,
-		layout?.inherit,
-		layout?.contentSize,
-		layout?.wideSize,
-		globalLayoutSettings,
-	] );
-
-	// If there is a Post Content block we use its layout for the block list;
-	// if not, this must be a classic theme, in which case we use the fallback layout.
-	const blockListLayout = postContentAttributes
-		? postContentLayout
-		: fallbackLayout;
-
-	const postEditorLayout =
-		blockListLayout?.type === 'default' && ! hasPostContentAtRootLevel
-			? fallbackLayout
-			: blockListLayout;
 
 	const titleRef = useRef();
 	useEffect( () => {
@@ -336,12 +153,6 @@ export default function VisualEditor( { styles } ) {
 		],
 		[ styles ]
 	);
-
-	// Add some styles for alignwide/alignfull Post Content and its children.
-	const alignCSS = `.is-root-container.alignwide { max-width: var(--wp--style--global--wide-size); margin-left: auto; margin-right: auto;}
-		.is-root-container.alignwide:where(.is-layout-flow) > :not(.alignleft):not(.alignright) { max-width: var(--wp--style--global--wide-size);}
-		.is-root-container.alignfull { max-width: none; margin-left: auto; margin-right: auto;}
-		.is-root-container.alignfull:where(.is-layout-flow) > :not(.alignleft):not(.alignright) { max-width: none;}`;
 
 	// TODO: Styles not appearing in the iframe mode yet
 	// const isToBeIframed =
@@ -377,30 +188,6 @@ export default function VisualEditor( { styles } ) {
 						styles={ styles }
 						height="100%"
 					>
-						{ themeSupportsLayout &&
-							! themeHasDisabledLayoutStyles &&
-							! isTemplateMode && (
-								<>
-									<LayoutStyle
-										selector=".edit-post-visual-editor__post-title-wrapper"
-										layout={ fallbackLayout }
-									/>
-									<LayoutStyle
-										selector=".block-editor-block-list__layout.is-root-container"
-										layout={ postEditorLayout }
-									/>
-									{ align && (
-										<LayoutStyle css={ alignCSS } />
-									) }
-									{ postContentLayoutStyles && (
-										<LayoutStyle
-											layout={ postContentLayout }
-											css={ postContentLayoutStyles }
-										/>
-									) }
-								</>
-							) }
-
 						<EditorHeading.Slot mode="visual" />
 
 						<RecursionProvider
@@ -411,9 +198,8 @@ export default function VisualEditor( { styles } ) {
 								className={
 									isTemplateMode
 										? 'wp-site-blocks'
-										: `${ blockListLayoutClass } wp-block-post-content` // Ensure root level blocks receive default/flow blockGap styling rules.
+										: `wp-block-post-content` // Ensure root level blocks receive default/flow blockGap styling rules.
 								}
-								layout={ blockListLayout }
 							/>
 						</RecursionProvider>
 
