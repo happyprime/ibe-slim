@@ -1,13 +1,8 @@
 /**
- * External dependencies
- */
-import { flow } from 'lodash';
-
-/**
  * WordPress dependencies
  */
 import { withSelect, withDispatch } from '@wordpress/data';
-import { compose } from '@wordpress/compose';
+import { compose, pipe } from '@wordpress/compose';
 import { MenuItem, withSpokenMessages } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { check } from '@wordpress/icons';
@@ -25,7 +20,7 @@ function FeatureToggle( { onToggle, isActive, label, info, messageActivated, mes
 		<MenuItem
 			icon={ isActive && check }
 			isSelected={ isActive }
-			onClick={ flow( onToggle, speakMessage ) }
+			onClick={ pipe( onToggle, speakMessage ) }
 			role="menuitemcheckbox"
 			info={ info }
 		>

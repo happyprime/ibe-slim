@@ -11,7 +11,6 @@ var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/creat
 var _possibleConstructorReturn2 = _interopRequireDefault(require("@babel/runtime/helpers/possibleConstructorReturn"));
 var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime/helpers/getPrototypeOf"));
 var _inherits2 = _interopRequireDefault(require("@babel/runtime/helpers/inherits"));
-var _lodash = require("lodash");
 var _element = require("@wordpress/element");
 var _compose = require("@wordpress/compose");
 var _jsxRuntime = require("react/jsx-runtime");
@@ -20,8 +19,6 @@ function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t =
 function _callSuper(t, o, e) { return o = (0, _getPrototypeOf2["default"])(o), (0, _possibleConstructorReturn2["default"])(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], (0, _getPrototypeOf2["default"])(t).constructor) : o.apply(t, e)); }
 function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); } // @ts-nocheck
 /**
- * External dependencies
- */ /**
  * WordPress dependencies
  */ /**
  * Input types which are classified as button types, for use in considering
@@ -47,7 +44,7 @@ function isFocusNormalizedButton(element) {
     case 'BUTTON':
       return true;
     case 'INPUT':
-      return (0, _lodash.includes)(INPUT_BUTTON_TYPES, element.type);
+      return INPUT_BUTTON_TYPES.includes(element.type);
   }
   return false;
 }
@@ -130,7 +127,7 @@ var _default = exports["default"] = (0, _compose.createHigherOrderComponent)(fun
       value: function normalizeButtonFocus(event) {
         var type = event.type,
           target = event.target;
-        var isInteractionEnd = (0, _lodash.includes)(['mouseup', 'touchend'], type);
+        var isInteractionEnd = ['mouseup', 'touchend'].includes(type);
         if (isInteractionEnd) {
           this.preventBlurCheck = false;
         } else if (isFocusNormalizedButton(target)) {

@@ -5,25 +5,10 @@ import {
 	BlockCanvas,
 	BlockList,
 	BlockTools,
-	__unstableUseTypewriter as useTypewriter,
-	RecursionProvider,
-// @ts-ignore
+	__unstableUseTypewriter as useTypewriter
 } from '@wordpress/block-editor';
 import { useRef } from '@wordpress/element';
 import { useMergeRefs } from '@wordpress/compose';
-// @ts-ignore
-import { parse, store as blocksStore } from '@wordpress/blocks';
-// @ts-ignore
-import { store as editorStore } from '@wordpress/editor';
-
-// @ts-ignore
-const isGutenbergPlugin = true;
-
-/**
- * Internal dependencies
- */
-import EditorHeading from '../editor-heading-slot';
-import FooterSlot from '../footer-slot';
 
 /**
  * This is a copy of packages/edit-post/src/components/visual-editor/index.js
@@ -47,16 +32,7 @@ export default function VisualEditor() {
 				contentRef={ contentRef }
 				height="100%"
 			>
-				<EditorHeading.Slot mode="visual" />
-
-				<RecursionProvider
-					blockName={ 'core/post-content' }
-					uniqueId={ 'averyuniqueeditor' }
-				>
-					<BlockList />
-				</RecursionProvider>
-
-				<FooterSlot.Slot mode="visual" />
+				<BlockList />
 			</BlockCanvas>
 		</BlockTools>
 	);

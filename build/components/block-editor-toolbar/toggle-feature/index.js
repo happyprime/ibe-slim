@@ -4,17 +4,12 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = void 0;
-var _lodash = require("lodash");
 var _data = require("@wordpress/data");
 var _compose = require("@wordpress/compose");
 var _components = require("@wordpress/components");
 var _i18n = require("@wordpress/i18n");
 var _icons = require("@wordpress/icons");
 var _jsxRuntime = require("react/jsx-runtime");
-/**
- * External dependencies
- */
-
 /**
  * WordPress dependencies
  */
@@ -37,7 +32,7 @@ function FeatureToggle(_ref) {
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_components.MenuItem, {
     icon: isActive && _icons.check,
     isSelected: isActive,
-    onClick: (0, _lodash.flow)(onToggle, speakMessage),
+    onClick: (0, _compose.pipe)(onToggle, speakMessage),
     role: "menuitemcheckbox",
     info: info,
     children: label

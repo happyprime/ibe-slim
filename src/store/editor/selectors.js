@@ -1,9 +1,4 @@
 /**
- * External dependencies
- */
-import { includes } from 'lodash';
-
-/**
  * WordPress dependencies
  */
 import { createRegistrySelector } from '@wordpress/data';
@@ -122,7 +117,7 @@ export function isInserterOpened( state ) {
 export const isEditorSidebarOpened = createRegistrySelector( ( select ) => () => {
 	const activeGeneralSidebar = select( interfaceStore ).getActiveComplementaryArea( 'isolated/editor' );
 
-	return includes( [ 'edit-post/document', 'edit-post/block' ], activeGeneralSidebar );
+	return [ 'edit-post/document', 'edit-post/block' ].includes( activeGeneralSidebar );
 } );
 
 /**
