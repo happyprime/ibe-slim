@@ -9,8 +9,7 @@ import {
 	RecursionProvider,
 // @ts-ignore
 } from '@wordpress/block-editor';
-import { useEffect, useRef } from '@wordpress/element';
-import { useSelect } from '@wordpress/data';
+import { useRef } from '@wordpress/element';
 import { useMergeRefs } from '@wordpress/compose';
 // @ts-ignore
 import { parse, store as blocksStore } from '@wordpress/blocks';
@@ -35,64 +34,8 @@ import FooterSlot from '../footer-slot';
  * @param args.styles
  */
 export default function VisualEditor() {
-	const {
-		isWelcomeGuideVisible,
-		wrapperBlockName,
-		wrapperUniqueId,
-		// @ts-ignore
-		isBlockBasedTheme,
-		// @ts-ignore
-		hasV3BlocksOnly,
-	} = useSelect( ( select ) => {
-		const {
-			isFeatureActive,
-		} = select( 'isolated/editor' );
-		const { getCurrentPostId, getCurrentPostType, getEditorSettings } =
-			select( editorStore );
-		const { getBlockTypes } = select( blocksStore );
-		const _isTemplateMode = false;
-		const postTypeSlug = getCurrentPostType();
-		let _wrapperBlockName;
-
-		if ( postTypeSlug === 'wp_block' ) {
-			_wrapperBlockName = 'core/block';
-		} else if ( ! _isTemplateMode ) {
-			_wrapperBlockName = 'core/post-content';
-		}
-
-		const editorSettings = getEditorSettings();
-
-		return {
-			deviceType: 'Desktop',
-			// @ts-ignore
-			isWelcomeGuideVisible: isFeatureActive( 'welcomeGuide' ),
-			isTemplateMode: _isTemplateMode,
-			postContentAttributes: getEditorSettings().postContentAttributes,
-			// Post template fetch returns a 404 on classic themes, which
-			// messes with e2e tests, so check it's a block theme first.
-			editedPostTemplate: undefined,
-			wrapperBlockName: _wrapperBlockName,
-			wrapperUniqueId: getCurrentPostId(),
-			isBlockBasedTheme: editorSettings.__unstableIsBlockBasedTheme,
-			hasV3BlocksOnly: getBlockTypes().every( ( type ) => {
-				return type.apiVersion >= 3;
-			} ),
-		};
-	}, [] );
-	// @ts-ignore
-	const { isCleanNewPost } = useSelect( editorStore );
-
 	const ref = useRef();
 	const contentRef = useMergeRefs( [ ref, useTypewriter() ] );
-
-	const titleRef = useRef();
-	useEffect( () => {
-		if ( isWelcomeGuideVisible || ! isCleanNewPost() ) {
-			return;
-		}
-		// @ts-ignore
-		titleRef?.current?.focus();
-	}, [ isWelcomeGuideVisible, isCleanNewPost ] );
 
 	return (
 		<BlockTools
@@ -107,8 +50,8 @@ export default function VisualEditor() {
 				<EditorHeading.Slot mode="visual" />
 
 				<RecursionProvider
-					blockName={ wrapperBlockName }
-					uniqueId={ wrapperUniqueId }
+					blockName={ 'core/post-content' }
+					uniqueId={ 'averyuniqueeditor' }
 				>
 					<BlockList />
 				</RecursionProvider>
