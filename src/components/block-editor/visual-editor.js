@@ -34,7 +34,7 @@ const isGutenbergPlugin = true;
  */
 import EditorHeading from '../editor-heading-slot';
 import FooterSlot from '../footer-slot';
-import { unlock } from './unlock';
+import { superUnlock } from '@happyprime/wp-super-unlock';
 
 
 const {
@@ -42,7 +42,7 @@ const {
 	useLayoutClasses,
 	useLayoutStyles,
 	ExperimentalBlockCanvas: BlockCanvas,
-} = unlock( blockEditorPrivateApis );
+} = superUnlock( blockEditorPrivateApis, '6.5' );
 
 /**
  * Given an array of nested blocks, find the first Post Content

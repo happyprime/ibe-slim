@@ -20,10 +20,9 @@ import { ESCAPE } from '@wordpress/keycodes';
  */
 import ListViewOutline from './list-view-outline';
 
-import { unlock } from './unlock';
+import { superUnlock } from '@happyprime/wp-super-unlock';
 
-const { Tabs } = unlock( componentsPrivateApis );
-
+const { Tabs } = superUnlock( componentsPrivateApis, '6.5' );
 
 export default function ListViewSidebar( { canClose = true } ) {
 	const { setIsListViewOpened } = useDispatch( 'isolated/editor' );

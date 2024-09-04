@@ -7,7 +7,7 @@ exports.sidebars = exports["default"] = void 0;
 var _components = require("@wordpress/components");
 var _i18n = require("@wordpress/i18n");
 var _data = require("@wordpress/data");
-var _unlock2 = require("./unlock");
+var _wpSuperUnlock = require("@happyprime/wp-super-unlock");
 var _jsxRuntime = require("react/jsx-runtime");
 /**
  * WordPress dependencies
@@ -21,8 +21,8 @@ var sidebars = exports.sidebars = {
   document: 'edit-post/document',
   block: 'edit-post/block'
 };
-var _unlock = (0, _unlock2.unlock)(_components.privateApis),
-  Tabs = _unlock.Tabs;
+var _superUnlock = (0, _wpSuperUnlock.superUnlock)(_components.privateApis, '6.5'),
+  Tabs = _superUnlock.Tabs;
 var SettingsHeader = function SettingsHeader(_ref) {
   var documentInspector = _ref.documentInspector;
   var _useSelect = (0, _data.useSelect)(function (select) {
