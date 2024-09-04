@@ -5,6 +5,6 @@ import { __dangerousOptInToUnstableAPIsOnlyForCoreModules } from '@wordpress/pri
 
 export const { unlock } =
     __dangerousOptInToUnstableAPIsOnlyForCoreModules(
-        'I acknowledge private features are not for use in themes or plugins and doing so will break in the next version of WordPress.',
+        'I know using unstable features means my theme or plugin will inevitably break in the next version of WordPress.',
         '@wordpress/edit-post'
     );

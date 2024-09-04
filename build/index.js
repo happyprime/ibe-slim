@@ -66,6 +66,7 @@ var _footerSlot = _interopRequireDefault(require("./components/footer-slot"));
 var _editorLoaded = _interopRequireDefault(require("./components/editor-loaded"));
 var _editorHeadingSlot = _interopRequireDefault(require("./components/editor-heading-slot"));
 require("./store/edit-post");
+require("./style.scss");
 var _jsxRuntime = require("react/jsx-runtime");
 var _excluded = ["children", "onSaveContent", "onSaveBlocks", "__experimentalUndoManager", "__experimentalOnInput", "__experimentalOnChange", "__experimentalValue", "__experimentalOnSelection"]; // @ts-nocheck
 /**
