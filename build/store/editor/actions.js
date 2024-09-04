@@ -14,6 +14,7 @@ var _interface = require("@wordpress/interface");
 
 /** @typedef {import('../../index').BlockEditorSettings} BlockEditorSettings */
 /** @typedef {import('./reducer').EditorMode} EditorMode */
+
 var actions = {
   /**
    * Set whether the editor is ready for editing

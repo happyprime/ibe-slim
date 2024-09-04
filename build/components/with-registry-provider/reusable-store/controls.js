@@ -67,7 +67,7 @@ var controls = {
   }),
   CONVERT_BLOCKS_TO_REUSABLE: (0, _data.createRegistryControl)(function (registry) {
     return /*#__PURE__*/function () {
-      var _ref3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(_ref2) {
+      var _ref3 = (0, _asyncToGenerator2["default"])(/*#__PURE__*/_regenerator["default"].mark(function _callee(_ref2) {
         var clientIds, reusableBlock, updatedRecord, newBlock;
         return _regenerator["default"].wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
@@ -102,7 +102,7 @@ var controls = {
   }),
   DELETE_REUSABLE_BLOCK: (0, _data.createRegistryControl)(function (registry) {
     return /*#__PURE__*/function () {
-      var _ref5 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(_ref4) {
+      var _ref5 = (0, _asyncToGenerator2["default"])(/*#__PURE__*/_regenerator["default"].mark(function _callee2(_ref4) {
         var id, reusableBlock, allBlocks, associatedBlocks, associatedBlockClientIds;
         return _regenerator["default"].wrap(function _callee2$(_context2) {
           while (1) switch (_context2.prev = _context2.next) {

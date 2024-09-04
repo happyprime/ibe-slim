@@ -8,6 +8,6 @@ const old    = 'I know using unstable features means my theme or plugin will ine
 
 export const { unlock } =
     __dangerousOptInToUnstableAPIsOnlyForCoreModules(
-        latest,
+        'I acknowledge private features are not for use in themes or plugins and doing so will break in the next version of WordPress.',
         '@wordpress/edit-post'
     );
