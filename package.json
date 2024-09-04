@@ -1,17 +1,15 @@
 {
-	"name": "@automattic/isolated-block-editor",
-	"version": "2.29.0",
-	"description": "Repackages Gutenberg's editor playground as multi-instance editor.",
+	"name": "@happyprime/ibe-slim",
+	"version": "3.0.0",
+	"description": "A fork of @automattic/isolated-block-editor. Unsupported.",
 	"main": "build/index.js",
-	"module": "build-module/index.js",
-	"types": "build-types",
-	"homepage": "https://github.com/Automattic/isolated-block-editor/blob/trunk/README.md",
+	"homepage": "https://github.com/happyprime/ibe-slim/blob/trunk/README.md",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/Automattic/isolated-block-editor.git"
+		"url": "https://github.com/happyprime/ibe-slim.git"
 	},
 	"bugs": {
-		"url": "https://github.com/Automattic/isolated-block-editor/issues"
+		"url": "https://github.com/happyprime/ibe-slim/issues"
 	},
 	"engines": {
 		"node": ">=20"
@@ -26,7 +24,7 @@
 		"*.css",
 		"*.scss"
 	],
-	"author": "Automattic",
+	"author": "Happy Prime",
 	"license": "GPL-2.0-or-later",
 	"dependencies": {
 		"@happyprime/wp-super-unlock": "github:happyprime/wp-super-unlock",
@@ -39,14 +37,8 @@
 		"@babel/plugin-transform-runtime": "^7.24.7",
 		"@babel/preset-env": "^7.25.3",
 		"@babel/preset-react": "^7.24.7",
+		"@happyprime/eslint-config": "^0.0.8",
 		"@wordpress/babel-preset-default": "^8.5.0",
-		"@wordpress/prettier-config": "^4.5.0",
-		"@wordpress/scripts": "^28.5.0",
-		"prettier": "npm:wp-prettier@3.0.3",
 		"terser-webpack-plugin": "^5.3.10"
-	},
-	"publishConfig": {
-		"access": "public",
-		"registry": "https://registry.npmjs.org/"
 	}
 }
