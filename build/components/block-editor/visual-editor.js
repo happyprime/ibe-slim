@@ -17,14 +17,14 @@ var _blocks = require("@wordpress/blocks");
 var _editor = require("@wordpress/editor");
 var _editorHeadingSlot = _interopRequireDefault(require("../editor-heading-slot"));
 var _footerSlot = _interopRequireDefault(require("../footer-slot"));
-var _unlock2 = require("./unlock");
-import { createElement, Fragment } from "react";
+var _wpSuperUnlock = require("@happyprime/wp-super-unlock");
+var _jsxRuntime = require("react/jsx-runtime");
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { (0, _defineProperty2["default"])(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; } /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                          * External dependencies
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                          */ /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                              * WordPress dependencies
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                              */ // @ts-ignore
+ * External dependencies
+ */ /**
+ * WordPress dependencies
+ */ // @ts-ignore
 // @ts-ignore
 // @ts-ignore
 var isGutenbergPlugin = true;
@@ -33,11 +33,11 @@ var isGutenbergPlugin = true;
  * Internal dependencies
  */
 
-var _unlock = (0, _unlock2.unlock)(_blockEditor.privateApis),
-  LayoutStyle = _unlock.LayoutStyle,
-  useLayoutClasses = _unlock.useLayoutClasses,
-  useLayoutStyles = _unlock.useLayoutStyles,
-  BlockCanvas = _unlock.ExperimentalBlockCanvas;
+var _superUnlock = (0, _wpSuperUnlock.superUnlock)(_blockEditor.privateApis, '6.5'),
+  LayoutStyle = _superUnlock.LayoutStyle,
+  useLayoutClasses = _superUnlock.useLayoutClasses,
+  useLayoutStyles = _superUnlock.useLayoutStyles,
+  BlockCanvas = _superUnlock.ExperimentalBlockCanvas;
 
 /**
  * Given an array of nested blocks, find the first Post Content
@@ -291,49 +291,55 @@ function VisualEditor(_ref) {
   // 	deviceType === 'Tablet' ||
   // 	deviceType === 'Mobile';
   var isToBeIframed = false;
-  return createElement(_blockEditor.BlockTools, {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_blockEditor.BlockTools, {
     __unstableContentRef: ref,
     className: (0, _classnames["default"])('edit-post-visual-editor', {
       'is-template-mode': isTemplateMode,
       'has-inline-canvas': !isToBeIframed
+    }),
+    children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_components.__unstableMotion.div, {
+      className: "edit-post-visual-editor__content-area",
+      animate: {
+        padding: isTemplateMode ? '48px 48px 0' : 0
+      },
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_components.__unstableMotion.div, {
+        animate: animatedStyles,
+        initial: desktopCanvasStyles,
+        className: previewMode,
+        children: /*#__PURE__*/(0, _jsxRuntime.jsxs)(BlockCanvas, {
+          shouldIframe: isToBeIframed,
+          contentRef: contentRef,
+          styles: styles,
+          height: "100%",
+          children: [themeSupportsLayout && !themeHasDisabledLayoutStyles && !isTemplateMode && /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
+            children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(LayoutStyle, {
+              selector: ".edit-post-visual-editor__post-title-wrapper",
+              layout: fallbackLayout
+            }), /*#__PURE__*/(0, _jsxRuntime.jsx)(LayoutStyle, {
+              selector: ".block-editor-block-list__layout.is-root-container",
+              layout: postEditorLayout
+            }), align && /*#__PURE__*/(0, _jsxRuntime.jsx)(LayoutStyle, {
+              css: alignCSS
+            }), postContentLayoutStyles && /*#__PURE__*/(0, _jsxRuntime.jsx)(LayoutStyle, {
+              layout: postContentLayout,
+              css: postContentLayoutStyles
+            })]
+          }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_editorHeadingSlot["default"].Slot, {
+            mode: "visual"
+          }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_blockEditor.__experimentalRecursionProvider, {
+            blockName: wrapperBlockName,
+            uniqueId: wrapperUniqueId,
+            children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_blockEditor.BlockList, {
+              className: isTemplateMode ? 'wp-site-blocks' : "".concat(blockListLayoutClass, " wp-block-post-content") // Ensure root level blocks receive default/flow blockGap styling rules.
+              ,
+              layout: blockListLayout
+            })
+          }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_footerSlot["default"].Slot, {
+            mode: "visual"
+          })]
+        })
+      })
     })
-  }, createElement(_components.__unstableMotion.div, {
-    className: "edit-post-visual-editor__content-area",
-    animate: {
-      padding: isTemplateMode ? '48px 48px 0' : 0
-    }
-  }, createElement(_components.__unstableMotion.div, {
-    animate: animatedStyles,
-    initial: desktopCanvasStyles,
-    className: previewMode
-  }, createElement(BlockCanvas, {
-    shouldIframe: isToBeIframed,
-    contentRef: contentRef,
-    styles: styles,
-    height: "100%"
-  }, themeSupportsLayout && !themeHasDisabledLayoutStyles && !isTemplateMode && createElement(Fragment, null, createElement(LayoutStyle, {
-    selector: ".edit-post-visual-editor__post-title-wrapper",
-    layout: fallbackLayout
-  }), createElement(LayoutStyle, {
-    selector: ".block-editor-block-list__layout.is-root-container",
-    layout: postEditorLayout
-  }), align && createElement(LayoutStyle, {
-    css: alignCSS
-  }), postContentLayoutStyles && createElement(LayoutStyle, {
-    layout: postContentLayout,
-    css: postContentLayoutStyles
-  })), createElement(_editorHeadingSlot["default"].Slot, {
-    mode: "visual"
-  }), createElement(_blockEditor.__experimentalRecursionProvider, {
-    blockName: wrapperBlockName,
-    uniqueId: wrapperUniqueId
-  }, createElement(_blockEditor.BlockList, {
-    className: isTemplateMode ? 'wp-site-blocks' : "".concat(blockListLayoutClass, " wp-block-post-content") // Ensure root level blocks receive default/flow blockGap styling rules.
-    ,
-
-    layout: blockListLayout
-  })), createElement(_footerSlot["default"].Slot, {
-    mode: "visual"
-  })))));
+  });
 }
 //# sourceMappingURL=visual-editor.js.map

@@ -8,14 +8,14 @@ import { useSelect } from '@wordpress/data';
 /**
  * Internal dependencies
  */
-import { unlock } from './unlock';
+import { superUnlock } from '@happyprime/wp-super-unlock';
 
 export const sidebars = {
 	document: 'edit-post/document',
 	block: 'edit-post/block',
 };
 
-const { Tabs } = unlock( componentsPrivateApis );
+const { Tabs } = superUnlock( componentsPrivateApis, '6.5' );
 
 const SettingsHeader = ( { documentInspector } ) => {
 	const { documentLabel } = useSelect( ( select ) => {

@@ -7,8 +7,8 @@ exports.sidebars = exports["default"] = void 0;
 var _components = require("@wordpress/components");
 var _i18n = require("@wordpress/i18n");
 var _data = require("@wordpress/data");
-var _unlock2 = require("./unlock");
-import { createElement } from "react";
+var _wpSuperUnlock = require("@happyprime/wp-super-unlock");
+var _jsxRuntime = require("react/jsx-runtime");
 /**
  * WordPress dependencies
  */
@@ -21,8 +21,8 @@ var sidebars = exports.sidebars = {
   document: 'edit-post/document',
   block: 'edit-post/block'
 };
-var _unlock = (0, _unlock2.unlock)(_components.privateApis),
-  Tabs = _unlock.Tabs;
+var _superUnlock = (0, _wpSuperUnlock.superUnlock)(_components.privateApis, '6.5'),
+  Tabs = _superUnlock.Tabs;
 var SettingsHeader = function SettingsHeader(_ref) {
   var documentInspector = _ref.documentInspector;
   var _useSelect = (0, _data.useSelect)(function (select) {
@@ -35,11 +35,15 @@ var SettingsHeader = function SettingsHeader(_ref) {
     documentLabel = _useSelect.documentLabel;
 
   /* Use a list so screen readers will announce how many tabs there are. */
-  return createElement(Tabs.TabList, null, !!documentInspector && createElement(Tabs.Tab, {
-    tabId: sidebars.document
-  }, documentLabel), createElement(Tabs.Tab, {
-    tabId: sidebars.block
-  }, (0, _i18n.__)('Block')));
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(Tabs.TabList, {
+    children: [!!documentInspector && /*#__PURE__*/(0, _jsxRuntime.jsx)(Tabs.Tab, {
+      tabId: sidebars.document,
+      children: documentLabel
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(Tabs.Tab, {
+      tabId: sidebars.block,
+      children: (0, _i18n.__)('Block')
+    })]
+  });
 };
 var _default = exports["default"] = SettingsHeader;
 //# sourceMappingURL=sidebar-heading.js.map

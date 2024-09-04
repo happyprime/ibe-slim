@@ -16,7 +16,7 @@ var _blocks = require("@wordpress/blocks");
 var _blockEditor = require("@wordpress/block-editor");
 var _blockEditor2 = _interopRequireDefault(require("../block-editor"));
 var _editorContent = _interopRequireDefault(require("./editor-content"));
-import { createElement } from "react";
+var _jsxRuntime = require("react/jsx-runtime");
 /**
  * External dependencies
  */
@@ -63,7 +63,7 @@ function getInitialContent(_x, _x2) {
  * @param {OnLoad} props.onLoad - Load initial blocks
  */
 function _getInitialContent() {
-  _getInitialContent = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(settings, loader) {
+  _getInitialContent = (0, _asyncToGenerator2["default"])(/*#__PURE__*/_regenerator["default"].mark(function _callee2(settings, loader) {
     var contentLoader;
     return _regenerator["default"].wrap(function _callee2$(_context2) {
       while (1) switch (_context2.prev = _context2.next) {
@@ -97,7 +97,7 @@ function BlockEditorContents(props) {
   // Set initial content, if we have any, but only if there is no existing data in the editor (from elsewhere)
   (0, _element.useEffect)(function () {
     var loadData = /*#__PURE__*/function () {
-      var _ref = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee() {
+      var _ref = (0, _asyncToGenerator2["default"])(/*#__PURE__*/_regenerator["default"].mark(function _callee() {
         var initialContent;
         return _regenerator["default"].wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
@@ -123,21 +123,24 @@ function BlockEditorContents(props) {
     }();
     loadData();
   }, []);
-  return createElement(_blockEditor.BlockEditorProvider, {
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_blockEditor.BlockEditorProvider, {
     value: blocks || [],
     onInput: onInput,
     onChange: onChange,
     useSubRegistry: false,
     selection: selection,
-    settings: settings.editor
-  }, createElement(_blockEditor2["default"], {
-    isEditing: isEditing,
-    editorMode: editorMode,
-    settings: settings,
-    renderMoreMenu: renderMoreMenu
-  }, children),
-  // @ts-ignore
-  createElement(_components.Popover.Slot, null));
+    settings: settings.editor,
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_blockEditor2["default"], {
+      isEditing: isEditing,
+      editorMode: editorMode,
+      settings: settings,
+      renderMoreMenu: renderMoreMenu,
+      children: children
+    }),
+    /*#__PURE__*/
+    // @ts-ignore
+    (0, _jsxRuntime.jsx)(_components.Popover.Slot, {})]
+  });
 }
 
 // @ts-ignore
