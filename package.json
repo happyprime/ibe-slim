@@ -28,6 +28,7 @@
 	"license": "GPL-2.0-or-later",
 	"dependencies": {
 		"@happyprime/wp-super-unlock": "github:happyprime/wp-super-unlock",
+		"@wordpress/base-styles": "^5.7.0",
 		"classnames": "^2.5.1",
 		"redux-undo": "^1.1.0"
 	},
