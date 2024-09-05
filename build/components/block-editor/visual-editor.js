@@ -17,6 +17,7 @@ var _blocks = require("@wordpress/blocks");
 var _editor = require("@wordpress/editor");
 var _editorHeadingSlot = _interopRequireDefault(require("../editor-heading-slot"));
 var _footerSlot = _interopRequireDefault(require("../footer-slot"));
+var _wpVersion = require("../../wp-version");
 var _wpSuperUnlock = require("@happyprime/wp-super-unlock");
 var _jsxRuntime = require("react/jsx-runtime");
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
@@ -33,7 +34,7 @@ var isGutenbergPlugin = true;
  * Internal dependencies
  */
 
-var _superUnlock = (0, _wpSuperUnlock.superUnlock)(_blockEditor.privateApis, '6.5'),
+var _superUnlock = (0, _wpSuperUnlock.superUnlock)(_blockEditor.privateApis, _wpVersion.IBE_WP_VERSION),
   LayoutStyle = _superUnlock.LayoutStyle,
   useLayoutClasses = _superUnlock.useLayoutClasses,
   useLayoutStyles = _superUnlock.useLayoutStyles,
