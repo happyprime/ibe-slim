@@ -8,6 +8,7 @@ import { useSelect } from '@wordpress/data';
 /**
  * Internal dependencies
  */
+import { IBE_WP_VERSION } from '../../wp-version';
 import { superUnlock } from '@happyprime/wp-super-unlock';
 
 export const sidebars = {
@@ -15,7 +16,7 @@ export const sidebars = {
 	block: 'edit-post/block',
 };
 
-const { Tabs } = superUnlock( componentsPrivateApis, '6.5' );
+const { Tabs } = superUnlock( componentsPrivateApis, IBE_WP_VERSION );
 
 const SettingsHeader = ( { documentInspector } ) => {
 	const { documentLabel } = useSelect( ( select ) => {

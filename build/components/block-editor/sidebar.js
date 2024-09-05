@@ -17,6 +17,7 @@ var _data = require("@wordpress/data");
 var _sidebarHeading = _interopRequireWildcard(require("./sidebar-heading"));
 var _document = _interopRequireDefault(require("../document"));
 var _complementaryArea = _interopRequireDefault(require("../complementary-area"));
+var _wpVersion = require("../../wp-version");
 var _wpSuperUnlock = require("@happyprime/wp-super-unlock");
 var _jsxRuntime = require("react/jsx-runtime");
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
@@ -30,7 +31,7 @@ function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; 
  * Internal dependencies
  */
 
-var _superUnlock = (0, _wpSuperUnlock.superUnlock)(_components.privateApis, '6.5'),
+var _superUnlock = (0, _wpSuperUnlock.superUnlock)(_components.privateApis, _wpVersion.IBE_WP_VERSION),
   Tabs = _superUnlock.Tabs;
 function isActiveArea(area) {
   return [_sidebarHeading.sidebars.document, _sidebarHeading.sidebars.block].includes(area);
