@@ -29,6 +29,7 @@
 	"dependencies": {
 		"@happyprime/wp-super-unlock": "github:happyprime/wp-super-unlock",
 		"@wordpress/base-styles": "^5.7.0",
+		"@wordpress/interface": "^6.7.0",
 		"classnames": "^2.5.1",
 		"redux-undo": "^1.1.0"
 	},
