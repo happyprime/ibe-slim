@@ -41,7 +41,7 @@ const {
 	useLayoutClasses,
 	useLayoutStyles,
 	ExperimentalBlockCanvas: BlockCanvas,
-} = unlock( blockEditorPrivateApis, IBE_WP_VERSION );
+} = unlock( blockEditorPrivateApis );
 
 /**
  * Given an array of nested blocks, find the first Post Content

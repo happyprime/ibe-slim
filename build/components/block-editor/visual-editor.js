@@ -33,7 +33,7 @@ var isGutenbergPlugin = true;
  * Internal dependencies
  */
 
-var _unlock = (0, _unlock2.unlock)(_blockEditor.privateApis, IBE_WP_VERSION),
+var _unlock = (0, _unlock2.unlock)(_blockEditor.privateApis),
   LayoutStyle = _unlock.LayoutStyle,
   useLayoutClasses = _unlock.useLayoutClasses,
   useLayoutStyles = _unlock.useLayoutStyles,
