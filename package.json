@@ -27,6 +27,7 @@
 	"author": "Happy Prime",
 	"license": "GPL-2.0-or-later",
 	"dependencies": {
+		"@babel/runtime": "^7.25.6",
 		"@happyprime/wp-super-unlock": "github:happyprime/wp-super-unlock",
 		"@wordpress/a11y": "3.53.0",
 		"@wordpress/annotations": "2.53.0",
