@@ -17,8 +17,7 @@ var _icons = require("@wordpress/icons");
 var _keyboardShortcuts = require("@wordpress/keyboard-shortcuts");
 var _keycodes = require("@wordpress/keycodes");
 var _listViewOutline = _interopRequireDefault(require("./list-view-outline"));
-var _wpVersion = require("../../wp-version");
-var _wpSuperUnlock = require("@happyprime/wp-super-unlock");
+var _unlock2 = require("./unlock");
 var _jsxRuntime = require("react/jsx-runtime");
 /**
  * WordPress dependencies
@@ -28,8 +27,8 @@ var _jsxRuntime = require("react/jsx-runtime");
  * Internal dependencies
  */
 
-var _superUnlock = (0, _wpSuperUnlock.superUnlock)(_components.privateApis, _wpVersion.IBE_WP_VERSION),
-  Tabs = _superUnlock.Tabs;
+var _unlock = (0, _unlock2.unlock)(_components.privateApis),
+  Tabs = _unlock.Tabs;
 function ListViewSidebar(_ref) {
   var _ref$canClose = _ref.canClose,
     canClose = _ref$canClose === void 0 ? true : _ref$canClose;

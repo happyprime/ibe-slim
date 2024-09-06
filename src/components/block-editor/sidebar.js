@@ -18,10 +18,9 @@ import { useSelect, useDispatch } from '@wordpress/data';
 import {default as SettingsHeader, sidebars} from './sidebar-heading';
 import Document from '../document';
 import ComplementaryArea from '../complementary-area';
-import { IBE_WP_VERSION } from '../../wp-version';
-import { superUnlock } from '@happyprime/wp-super-unlock';
+import { unlock } from './unlock';
 
-const { Tabs } = superUnlock( componentsPrivateApis, IBE_WP_VERSION );
+const { Tabs } = unlock( componentsPrivateApis );
 
 function isActiveArea( area ) {
 	return [ sidebars.document, sidebars.block ].includes( area )

@@ -34,16 +34,14 @@ const isGutenbergPlugin = true;
  */
 import EditorHeading from '../editor-heading-slot';
 import FooterSlot from '../footer-slot';
-import { IBE_WP_VERSION } from '../../wp-version';
-import { superUnlock } from '@happyprime/wp-super-unlock';
-
+import { unlock } from './unlock';
 
 const {
 	LayoutStyle,
 	useLayoutClasses,
 	useLayoutStyles,
 	ExperimentalBlockCanvas: BlockCanvas,
-} = superUnlock( blockEditorPrivateApis, IBE_WP_VERSION );
+} = unlock( blockEditorPrivateApis, IBE_WP_VERSION );
 
 /**
  * Given an array of nested blocks, find the first Post Content

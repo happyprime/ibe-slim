@@ -19,11 +19,9 @@ import { ESCAPE } from '@wordpress/keycodes';
  * Internal dependencies
  */
 import ListViewOutline from './list-view-outline';
+import { unlock } from './unlock';
 
-import { IBE_WP_VERSION } from '../../wp-version';
-import { superUnlock } from '@happyprime/wp-super-unlock';
-
-const { Tabs } = superUnlock( componentsPrivateApis, IBE_WP_VERSION );
+const { Tabs } = unlock( componentsPrivateApis );
 
 export default function ListViewSidebar( { canClose = true } ) {
 	const { setIsListViewOpened } = useDispatch( 'isolated/editor' );
