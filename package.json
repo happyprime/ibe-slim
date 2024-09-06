@@ -1,7 +1,7 @@
 {
 	"name": "@happyprime/ibe-slim",
 	"version": "3.0.0",
-	"description": "A fork of @automattic/isolated-block-editor. Unsupported.",
+	"description": "A single-purpose fork of @automattic/isolated-block-editor. Unsupported.",
 	"main": "build/index.js",
 	"homepage": "https://github.com/happyprime/ibe-slim/blob/trunk/README.md",
 	"repository": {
@@ -16,9 +16,7 @@
 	},
 	"scripts": {
 		"build": "BUILD_ENV=cjs babel src --out-dir build --source-maps --ignore 'src/**/__tests__/*.js' --copy-files --no-copy-ignored && rm -rf build/browser",
-		"clean": "rm -rf build",
-		"format": "wp-scripts format",
-		"lint:js": "wp-scripts lint-js"
+		"clean": "rm -rf build"
 	},
 	"sideEffects": [
 		"*.css",
