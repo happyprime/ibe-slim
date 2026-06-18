@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.1.0] - 2026-06-18
+
+### React 19 compatibility
+- Remove `event.persist()` in `with-focus-outside` (removed in React 19; a no-op since React 17).
+- Replace the unmaintained `react-autosize-textarea` dependency in the text/code editor with a native `<textarea>` (only standard attributes were used). Removes a bundled dependency that is not React 19 compatible.
+
+### Notes
+- Verified against Gutenberg 22.5.x (WordPress 7.0-era): all private/experimental block-editor and components exports this package unlocks (`ExperimentalBlockCanvas`, `useLayoutClasses`/`useLayoutStyles`/`LayoutStyle`, `__experimentalListView`, `__experimentalLibrary`, `__unstableUseTypewriter`, `__experimentalUseResizeCanvas`, `__experimentalRecursionProvider`, private `Tabs`, `__unstableMotion`) are still present.
+
 ## [3.0.2] - 2025-03-11
 
 - Update NPM packages to latest versions.

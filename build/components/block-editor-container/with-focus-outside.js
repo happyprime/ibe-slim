@@ -83,9 +83,9 @@ var _default = exports["default"] = (0, _compose.createHigherOrderComponent)(fun
       key: "queueBlurCheck",
       value: function queueBlurCheck(event) {
         var _this2 = this;
-        // React does not allow using an event reference asynchronously
-        // due to recycling behavior, except when explicitly persisted.
-        event.persist();
+        // React 17+ no longer pools synthetic events, and `event.persist()`
+        // was removed entirely in React 19, so the event reference can be
+        // used asynchronously below without persisting it first.
 
         // Skip blur check if clicking button. See `normalizeButtonFocus`.
         if (this.preventBlurCheck) {

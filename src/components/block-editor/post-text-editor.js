@@ -1,9 +1,4 @@
 /**
- * External dependencies
- */
-import Textarea from 'react-autosize-textarea';
-
-/**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
@@ -71,7 +66,7 @@ export class PostTextEditor extends Component {
 				<label htmlFor={ `post-content-${ instanceId }` } className="screen-reader-text">
 					{ __( 'Type text or HTML' ) }
 				</label>
-				<Textarea
+				<textarea
 					autoComplete="off"
 					dir="auto"
 					value={ value }
