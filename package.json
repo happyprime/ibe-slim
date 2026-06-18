@@ -37,7 +37,6 @@
 		"@babel/preset-env": "^7.26.9",
 		"@babel/preset-react": "^7.26.3",
 		"@happyprime/eslint-config": "^1.0.0",
-		"@wordpress/babel-preset-default": "^8.19.0",
-		"terser-webpack-plugin": "^5.3.14"
+		"@wordpress/babel-preset-default": "^8.48.1"
 	}
 }

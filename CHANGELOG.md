@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Tooling
 - Adopt `@happyprime/eslint-config` 1.0 (ESLint 9 / flat config). Adds an `eslint.config.mjs` and `lint`/`lint:fix` scripts. ESLint, the plugins, and `globals` come from the shared config's peer dependencies, so they are not declared here. Disables `react/display-name` for this package's pervasive HOC/Slot-Fill wrappers, and applies the shared Prettier formatting across `src/`.
+- Update build dev dependencies: `@wordpress/babel-preset-default` to ^8.48.1 and `@babel/*` to the latest 7.x. Babel 8 is held back because `@wordpress/babel-preset-default` still requires Babel ^7 (`BABEL_VERSION_UNSUPPORTED`). Remove the unused `terser-webpack-plugin` (the build is Babel-only; the webpack/browser build was removed previously).
 
 ### Notes
 - Verified against Gutenberg 22.5.x (WordPress 7.0-era): all private/experimental block-editor and components exports this package unlocks (`ExperimentalBlockCanvas`, `useLayoutClasses`/`useLayoutStyles`/`LayoutStyle`, `__experimentalListView`, `__experimentalLibrary`, `__unstableUseTypewriter`, `__experimentalUseResizeCanvas`, `__experimentalRecursionProvider`, private `Tabs`, `__unstableMotion`) are still present.
