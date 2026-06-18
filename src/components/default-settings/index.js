@@ -6,8 +6,13 @@ import { __ } from '@wordpress/i18n';
 
 /** @typedef {import('../../index').BlockEditorSettings} BlockEditorSettings */
 
-function getMenu( current, defaultMenu ) {
-	if ( current === false ) {
+/**
+ *
+ * @param current
+ * @param defaultMenu
+ */
+function getMenu(current, defaultMenu) {
+	if (current === false) {
 		return false;
 	}
 
@@ -18,9 +23,9 @@ function getMenu( current, defaultMenu ) {
  * Apply default settings to the user supplied settings, ensuring we have a full and valid set of settings
  *
  * @param {BlockEditorSettings} settings - Settings
- * @return {BlockEditorSettings}
+ * @returns {BlockEditorSettings}
  */
-export default function applyDefaultSettings( settings ) {
+export default function applyDefaultSettings(settings) {
 	const { iso, editor } = settings;
 
 	return {
@@ -35,7 +40,10 @@ export default function applyDefaultSettings( settings ) {
 			customStores: iso?.customStores ?? [],
 
 			// Default to all blocks
-			blocks: { allowBlocks: iso?.blocks?.allowBlocks ?? [], disallowBlocks: iso?.blocks?.disallowBlocks ?? [] },
+			blocks: {
+				allowBlocks: iso?.blocks?.allowBlocks ?? [],
+				disallowBlocks: iso?.blocks?.disallowBlocks ?? [],
+			},
 
 			// Inserter, undo, and inspector is on, everything else is off
 			toolbar: {
@@ -52,7 +60,7 @@ export default function applyDefaultSettings( settings ) {
 				// @ts-ignore */}
 				selectorTool: false,
 
-				...( iso?.toolbar ?? {} ),
+				...(iso?.toolbar ?? {}),
 			},
 
 			header: iso?.header ?? true,
@@ -62,27 +70,27 @@ export default function applyDefaultSettings( settings ) {
 				inspector: false,
 				customComponent: null,
 
-				...( iso?.sidebar ?? {} ),
+				...(iso?.sidebar ?? {}),
 			},
 
 			footer: iso?.footer ?? false,
 
 			// Nothing appears in the 'more menu'
-			moreMenu: getMenu( iso?.moreMenu, {
+			moreMenu: getMenu(iso?.moreMenu, {
 				editor: false,
 				fullscreen: false,
 				preview: false,
 				topToolbar: false,
 
-				...( iso?.moreMenu ?? {} ),
-			} ),
+				...(iso?.moreMenu ?? {}),
+			}),
 
 			// No link menu
 			linkMenu: iso?.linkMenu ?? [],
 
 			// Default to top toolbar
 			defaultPreferences: {
-				...( iso?.defaultPreferences ?? {} ),
+				...(iso?.defaultPreferences ?? {}),
 			},
 
 			allowApi: iso?.allowApi ?? false,
@@ -100,7 +108,7 @@ export default function applyDefaultSettings( settings ) {
 			disableCustomColors: false,
 			disableCustomFontSizes: false,
 			disablePostFormats: true,
-			titlePlaceholder: __( 'Add title' ),
+			titlePlaceholder: __('Add title'),
 			isRTL: false,
 			autosaveInterval: 60,
 			maxUploadFileSize: 0,
@@ -132,7 +140,9 @@ export default function applyDefaultSettings( settings ) {
 
 			...editor,
 
-			bodyPlaceholder: editor?.bodyPlaceholder ?? __( 'Start writing or type / to choose a block' ),
+			bodyPlaceholder:
+				editor?.bodyPlaceholder ??
+				__('Start writing or type / to choose a block'),
 
 			// @ts-ignore */}
 			availableLegacyWidgets: {},
@@ -140,10 +150,13 @@ export default function applyDefaultSettings( settings ) {
 
 			// Default to no link suggestions
 			// @ts-ignore */}
-			fetchLinkSuggestions: editor?.fetchLinkSuggestions ?? editor?.__experimentalFetchLinkSuggestions
-				? // @ts-ignore */}
-				  editor?.fetchLinkSuggestions ?? editor?.__experimentalFetchLinkSuggestions
-				: () => [],
+			fetchLinkSuggestions:
+				(editor?.fetchLinkSuggestions ??
+				editor?.__experimentalFetchLinkSuggestions)
+					? // @ts-ignore */}
+						(editor?.fetchLinkSuggestions ??
+						editor?.__experimentalFetchLinkSuggestions)
+					: () => [],
 		},
 	};
 }

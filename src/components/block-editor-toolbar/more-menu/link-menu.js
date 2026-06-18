@@ -10,23 +10,23 @@ import { MenuItem, ExternalLink } from '@wordpress/components';
 /**
  * Link menu
  *
- * @param {Object} props - Component props
+ * @param {object} props - Component props
  * @param {BlockEditorSettings} props.settings - Settings
  */
-function LinkMenu( { settings } ) {
+function LinkMenu({ settings }) {
 	const { linkMenu = [] } = settings.iso || {};
 
-	if ( linkMenu.length === 0 ) {
+	if (linkMenu.length === 0) {
 		return null;
 	}
 
 	return (
-		<MenuGroup label={ __( 'Links' ) }>
-			{ linkMenu.map( ( { title, url } ) => (
-				<MenuItem key={ title }>
-					<ExternalLink href={ url }>{ title }</ExternalLink>
+		<MenuGroup label={__('Links')}>
+			{linkMenu.map(({ title, url }) => (
+				<MenuItem key={title}>
+					<ExternalLink href={url}>{title}</ExternalLink>
 				</MenuItem>
-			) ) }
+			))}
 		</MenuGroup>
 	);
 }

@@ -46,7 +46,7 @@ var _unlock = (0, _unlock2.unlock)(_blockEditor.privateApis),
  *
  * @param {Array} blocks A list of blocks.
  *
- * @return {Object | undefined} The Post Content block.
+ * @returns {object | undefined} The Post Content block.
  */
 function getPostContentAttributes(blocks) {
   for (var i = 0; i < blocks.length; i++) {
@@ -61,6 +61,11 @@ function getPostContentAttributes(blocks) {
     }
   }
 }
+
+/**
+ *
+ * @param blocks
+ */
 function checkForPostContentAtRootLevel(blocks) {
   for (var i = 0; i < blocks.length; i++) {
     if (blocks[i].name === 'core/post-content') {
@@ -75,7 +80,7 @@ function checkForPostContentAtRootLevel(blocks) {
  *
  * The original is not exported, and contains code for post titles
  *
- * @param {Object} args
+ * @param {object} args
  * @param args.styles
  */
 function VisualEditor(_ref) {
@@ -210,9 +215,8 @@ function VisualEditor(_ref) {
     // @ts-ignore
     var parseableContent =
     // @ts-ignore
-    typeof (editedPostTemplate === null || editedPostTemplate === void 0 ? void 0 : editedPostTemplate.content) === 'string'
-    // @ts-ignore
-    ? editedPostTemplate === null || editedPostTemplate === void 0 ? void 0 : editedPostTemplate.content : '';
+    typeof (editedPostTemplate === null || editedPostTemplate === void 0 ? void 0 : editedPostTemplate.content) === 'string' ? // @ts-ignore
+    editedPostTemplate === null || editedPostTemplate === void 0 ? void 0 : editedPostTemplate.content : '';
 
     // @ts-ignore
     return getPostContentAttributes((0, _blocks.parse)(parseableContent)) || {};
@@ -234,9 +238,8 @@ function VisualEditor(_ref) {
     // Best double-check it's a string otherwise the parse function gets unhappy.
     var parseableContent =
     // @ts-ignore
-    typeof (editedPostTemplate === null || editedPostTemplate === void 0 ? void 0 : editedPostTemplate.content) === 'string'
-    // @ts-ignore
-    ? editedPostTemplate === null || editedPostTemplate === void 0 ? void 0 : editedPostTemplate.content : '';
+    typeof (editedPostTemplate === null || editedPostTemplate === void 0 ? void 0 : editedPostTemplate.content) === 'string' ? // @ts-ignore
+    editedPostTemplate === null || editedPostTemplate === void 0 ? void 0 : editedPostTemplate.content : '';
     return checkForPostContentAtRootLevel((0, _blocks.parse)(parseableContent)) || false;
     // @ts-ignore
   }, [editedPostTemplate === null || editedPostTemplate === void 0 ? void 0 : editedPostTemplate.content, editedPostTemplate === null || editedPostTemplate === void 0 ? void 0 : editedPostTemplate.blocks]);

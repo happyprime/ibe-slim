@@ -26,7 +26,7 @@ var _jsxRuntime = require("react/jsx-runtime");
 /**
  * Writing menu
  *
- * @param {Object} props - Component props
+ * @param {object} props - Component props
  * @param {OnClose} props.onClose - Close the menu
  * @param {BlockEditorSettings} props.settings - Settings
  */function WritingMenu(_ref) {

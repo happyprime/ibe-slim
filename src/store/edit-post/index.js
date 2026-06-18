@@ -10,12 +10,12 @@ import { registerStore, combineReducers } from '@wordpress/data';
 const STORE_KEY = 'core/edit-post';
 
 // This is a fake store to prevent errors if anything tries to use `isFeatureActive`
-const store = registerStore( STORE_KEY, {
-	reducer: combineReducers( {} ),
+const store = registerStore(STORE_KEY, {
+	reducer: combineReducers({}),
 	actions: {},
 	selectors: {
 		isFeatureActive: () => false,
 	},
-} );
+});
 
 export default store;

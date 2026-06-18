@@ -14,7 +14,17 @@ var _jsxRuntime = require("react/jsx-runtime");
  * WordPress dependencies
  */
 
-function FeatureToggle(_ref) {
+/**
+ *
+ * @param root0
+ * @param root0.onToggle
+ * @param root0.isActive
+ * @param root0.label
+ * @param root0.info
+ * @param root0.messageActivated
+ * @param root0.messageDeactivated
+ * @param root0.speak
+ */function FeatureToggle(_ref) {
   var onToggle = _ref.onToggle,
     isActive = _ref.isActive,
     label = _ref.label,

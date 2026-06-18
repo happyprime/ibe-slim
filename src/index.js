@@ -77,7 +77,7 @@ import './style.scss';
  * @typedef SidebarSettings
  * @property {boolean} [inspector=false] - Display the block inspector in a sidebar (true) or popover (false)
  * @property {boolean} [inserter=false] - Display the block inserter in a sidebar (true) or popover (false)
- * @property {function|null} [customComponent] - Function returning a custom sidebar component, or will default to the block inspector
+ * @property {Function | null} [customComponent] - Function returning a custom sidebar component, or will default to the block inspector
  */
 
 /**
@@ -96,7 +96,7 @@ import './style.scss';
  * @property {{title: string, url: string}[]} [linkMenu] - Link menu settings
  * @property {string|null} [currentPattern] - The pattern to start with
  * @property {Pattern[]} [patterns] - List of patterns
- * @property {Object} [defaultPreferences] - Default preferences if nothing in localStorage
+ * @property {object} [defaultPreferences] - Default preferences if nothing in localStorage
  * @property {boolean} [allowApi] - Allow API requests
  * @property {boolean} [disableCanvasAnimations] - Disable editor canvas animations
  * @property {SidebarSettings} [sidebar] - Configure sidebar functionality
@@ -115,7 +115,7 @@ import './style.scss';
  *
  * @typedef EditorSettings
  * @property {boolean} hasUploadPermissions
- * @property {Object} allowedMimeTypes
+ * @property {object} allowedMimeTypes
  * @property {string[]} allowedBlockTypes
  * @property {boolean} fixedToolbar
  * @property {boolean} hasFixedToolbar
@@ -131,14 +131,14 @@ import './style.scss';
  * OnSelect callback
  *
  * @callback OnSelect
- * @param {Object} selection - Editor content to save
+ * @param {object} selection - Editor content to save
  */
 
 /**
  * Initialize Gutenberg
  */
 export function initializeEditor() {
-	if ( window.isoInitialised ) {
+	if (window.isoInitialised) {
 		return;
 	}
 
@@ -148,18 +148,18 @@ export function initializeEditor() {
 	window.isoInitialised = true;
 }
 /**
- * @param {Object} props - Component props
+ * @param {object} props - Component props
  * @param {UndoManager} [props.undoManager]
  */
-export function useInitializeIsoEditor( { undoManager } = {} ) {
-	if ( window.isoInitialisedBlocks ) {
+export function useInitializeIsoEditor({ undoManager } = {}) {
+	if (window.isoInitialisedBlocks) {
 		return;
 	}
 
 	initializeEditor();
 
 	// This allows the editor to swap stores dynamically
-	use( storeHotSwapPlugin, {} );
+	use(storeHotSwapPlugin, {});
 
 	registerApiHandlers();
 
@@ -187,7 +187,7 @@ export function useInitializeIsoEditor( { undoManager } = {} ) {
  *
  * @callback OnParse
  * @param {string} content - HTML content
- * @return {object[]}
+ * @returns {object[]}
  */
 
 /**
@@ -196,7 +196,7 @@ export function useInitializeIsoEditor( { undoManager } = {} ) {
  * @callback OnLoad
  * @param {OnParse} parse - Current block parser
  * @param {OnParse} rawHandler - Current raw handler
- * @return {object[]|Promise}
+ * @returns {object[]|Promise}
  */
 
 /**
@@ -211,13 +211,13 @@ export function useInitializeIsoEditor( { undoManager } = {} ) {
  * This wraps up the Gutenberg editor along with a customised store. The contents of the editor are unique, and multiple instances
  * can be created.
  *
- * @param {Object} props - Component props
+ * @param {object} props - Component props
  * @param {OnSaveBlocks} [props.onSaveBlocks] - Save callback
  * @param {OnSaveContent} [props.onSaveContent] - Save callback
  * @param {OnError} props.onError - Error callback
  * @param {OnLoad} [props.onLoad] - Initial blocks
  * @param {BlockEditorSettings} props.settings - Settings
- * @param {Object} [props.children] - Child content
+ * @param {object} [props.children] - Child content
  * @param {string} [props.className] - Additional class name
  * @param {OnMore} [props.renderMoreMenu] - Callback to render additional items in the more menu
  * @param {UndoManager} [props.__experimentalUndoManager] - Undo manager
@@ -226,7 +226,7 @@ export function useInitializeIsoEditor( { undoManager } = {} ) {
  * @param {OnSelect} [props.__experimentalOnSelection] - Callback to run when the editor selection changes
  * @param {object[]} [props.__experimentalValue] - Gutenberg's value
  */
-function IsolatedBlockEditor( props ) {
+function IsolatedBlockEditor(props) {
 	const {
 		children,
 		onSaveContent,
@@ -240,41 +240,51 @@ function IsolatedBlockEditor( props ) {
 	} = props;
 
 	// This needs to happen first to setup Gutenbergy things
-	useInitializeIsoEditor( { undoManager: __experimentalUndoManager } );
+	useInitializeIsoEditor({ undoManager: __experimentalUndoManager });
 
-	const settings = useEditorSetup( props.settings );
+	const settings = useEditorSetup(props.settings);
 	const editorSelection = useSelect(
-		( select ) => ( {
-			start: select( 'core/block-editor' ).getSelectionStart(),
-			end: select( 'core/block-editor' ).getSelectionEnd(),
-		} ),
+		(select) => ({
+			start: select('core/block-editor').getSelectionStart(),
+			end: select('core/block-editor').getSelectionEnd(),
+		}),
 		[]
 	);
 
-	useEffect( () => {
-		__experimentalOnSelection?.( editorSelection );
-	}, [ editorSelection ] );
+	useEffect(() => {
+		__experimentalOnSelection?.(editorSelection);
+	}, [editorSelection]);
 
 	return (
 		<StrictMode>
-			<ContentSaver onSaveBlocks={ onSaveBlocks } onSaveContent={ onSaveContent } />
+			<ContentSaver
+				onSaveBlocks={onSaveBlocks}
+				onSaveContent={onSaveContent}
+			/>
 			<PatternMonitor />
 
 			<SlotFillProvider>
 				<BlockEditorContainer
-					{ ...params }
-					onInput={ __experimentalOnInput }
-					onChange={ __experimentalOnChange }
-					blocks={ __experimentalValue }
-					settings={ settings }
+					{...params}
+					onInput={__experimentalOnInput}
+					onChange={__experimentalOnChange}
+					blocks={__experimentalValue}
+					settings={settings}
 				>
-					{ children }
+					{children}
 				</BlockEditorContainer>
 			</SlotFillProvider>
 		</StrictMode>
 	);
 }
 
-export default withRegistryProvider( IsolatedBlockEditor );
+export default withRegistryProvider(IsolatedBlockEditor);
 
-export { EditorLoaded, DocumentSection, ToolbarSlot, FooterSlot, EditorHeadingSlot, ActionArea };
+export {
+	EditorLoaded,
+	DocumentSection,
+	ToolbarSlot,
+	FooterSlot,
+	EditorHeadingSlot,
+	ActionArea,
+};

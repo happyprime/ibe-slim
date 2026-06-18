@@ -16,7 +16,9 @@
 	},
 	"scripts": {
 		"build": "BUILD_ENV=cjs babel src --out-dir build --source-maps --ignore 'src/**/__tests__/*.js' --copy-files --no-copy-ignored && rm -rf build/browser",
-		"clean": "rm -rf build"
+		"clean": "rm -rf build",
+		"lint": "eslint .",
+		"lint:fix": "eslint . --fix"
 	},
 	"sideEffects": [
 		"*.css",
@@ -34,7 +36,7 @@
 		"@babel/plugin-transform-runtime": "^7.26.10",
 		"@babel/preset-env": "^7.26.9",
 		"@babel/preset-react": "^7.26.3",
-		"@happyprime/eslint-config": "^0.0.14",
+		"@happyprime/eslint-config": "^1.0.0",
 		"@wordpress/babel-preset-default": "^8.19.0",
 		"terser-webpack-plugin": "^5.3.14"
 	}

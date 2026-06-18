@@ -17,7 +17,7 @@ var _blocks = require("@wordpress/blocks");
 /**
  * Content saver
  *
- * @param {Object} props - Component props
+ * @param {object} props - Component props
  * @param {OnSaveBlocks} [props.onSaveBlocks] - Save blocks callback
  * @param {OnSaveContent} [props.onSaveContent] - Save content callback
  */
@@ -37,6 +37,10 @@ function ContentSaver(props) {
     }, []),
     blocks = _useSelect.blocks,
     ignoredContent = _useSelect.ignoredContent;
+
+  /**
+   *
+   */
   function saveBlocks() {
     // Save the content in the format wanted by the user
     onSaveBlocks === null || onSaveBlocks === void 0 || onSaveBlocks(blocks, ignoredContent);

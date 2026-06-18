@@ -27,6 +27,11 @@ function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t =
  */ /**
  * Internal dependencies
  */
+/**
+ *
+ * @param preferencesKey
+ * @param defaultPreferences
+ */
 function storeConfig(preferencesKey, defaultPreferences) {
   return {
     reducer: (0, _data.combineReducers)({

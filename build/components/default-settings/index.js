@@ -13,6 +13,11 @@ function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t =
  */
 /** @typedef {import('../../index').BlockEditorSettings} BlockEditorSettings */
 
+/**
+ *
+ * @param current
+ * @param defaultMenu
+ */
 function getMenu(current, defaultMenu) {
   if (current === false) {
     return false;
@@ -24,7 +29,7 @@ function getMenu(current, defaultMenu) {
  * Apply default settings to the user supplied settings, ensuring we have a full and valid set of settings
  *
  * @param {BlockEditorSettings} settings - Settings
- * @return {BlockEditorSettings}
+ * @returns {BlockEditorSettings}
  */
 function applyDefaultSettings(settings) {
   var _iso$preferencesKey, _iso$persistenceKey, _iso$disallowEmbed, _iso$customStores, _iso$blocks$allowBloc, _iso$blocks, _iso$blocks$disallowB, _iso$blocks2, _iso$toolbar, _iso$header, _iso$sidebar, _iso$footer, _iso$moreMenu, _iso$linkMenu, _iso$defaultPreferenc, _iso$allowApi, _iso$disableCanvasAni, _iso$currentPattern, _iso$patterns, _editor$bodyPlacehold, _editor$fetchLinkSugg, _editor$fetchLinkSugg2;

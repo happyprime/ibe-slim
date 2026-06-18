@@ -7,7 +7,6 @@ Object.defineProperty(exports, "__esModule", {
 exports["default"] = void 0;
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
-var _isPromise = _interopRequireDefault(require("is-promise"));
 var _components = require("@wordpress/components");
 var _data = require("@wordpress/data");
 var _compose = require("@wordpress/compose");
@@ -17,9 +16,6 @@ var _blockEditor = require("@wordpress/block-editor");
 var _blockEditor2 = _interopRequireDefault(require("../block-editor"));
 var _editorContent = _interopRequireDefault(require("./editor-content"));
 var _jsxRuntime = require("react/jsx-runtime");
-/**
- * External dependencies
- */
 /**
  * WordPress dependencies
  */
@@ -42,7 +38,7 @@ var _jsxRuntime = require("react/jsx-runtime");
  * @param {object[]} blocks - Editor content to save
  * @param settings
  * @param [loader]
- * @param {Object} [options]
+ * @param {object} [options]
  */
 function getInitialContent(_x, _x2) {
   return _getInitialContent.apply(this, arguments);
@@ -50,17 +46,21 @@ function getInitialContent(_x, _x2) {
 /**
  * The editor itself, including toolbar
  *
- * @param {Object} props - Component props
+ * @param {object} props - Component props
  * @param {object[]} props.blocks
  * @param {OnUpdate} props.onInput - Callback to update blocks
  * @param {OnUpdate} props.onChange - Callback to update blocks
  * @param {boolean} props.isEditing - Are we editing in this editor?
  * @param {EditorMode} props.editorMode - Visual or code?
- * @param {Object} props.children - Child components
+ * @param {object} props.children - Child components
  * @param {BlockEditorSettings} props.settings - Settings
  * @param {OnMore} props.renderMoreMenu - Callback to render additional items in the more menu
  * @param {OnSelection} props.selection
  * @param {OnLoad} props.onLoad - Load initial blocks
+ */
+/**
+ *
+ * @param props
  */
 function _getInitialContent() {
   _getInitialContent = (0, _asyncToGenerator2["default"])(/*#__PURE__*/_regenerator["default"].mark(function _callee2(settings, loader) {
@@ -68,7 +68,7 @@ function _getInitialContent() {
     return _regenerator["default"].wrap(function (_context2) {
       while (1) switch (_context2.prev = _context2.next) {
         case 0:
-          contentLoader = (0, _isPromise["default"])(loader) ? loader : new Promise(function (resolve) {
+          contentLoader = loader && typeof loader.then === 'function' ? loader : new Promise(function (resolve) {
             resolve(loader ? loader(_blocks.parse, _blocks.rawHandler) : []);
           });
           return _context2.abrupt("return", contentLoader.then(function (content) {

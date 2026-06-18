@@ -36,7 +36,7 @@ var INPUT_BUTTON_TYPES = ['button', 'submit'];
  *
  * @param {Element} element Element to test.
  *
- * @return {boolean} Whether element is a button.
+ * @returns {boolean} Whether element is a button.
  */
 function isFocusNormalizedButton(element) {
   switch (element.nodeName) {

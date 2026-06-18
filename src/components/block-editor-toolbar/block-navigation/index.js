@@ -14,34 +14,41 @@ import { forwardRef } from '@wordpress/element';
 import ListViewSidebar from '../../block-editor/listview-sidebar';
 import './style.scss';
 
-function BlockNavigationDropdown( { isDisabled, ...props }, ref ) {
+/**
+ *
+ * @param root0
+ * @param root0.isDisabled
+ * @param ref
+ */
+function BlockNavigationDropdown({ isDisabled, ...props }, ref) {
 	// @ts-ignore
-	const hasBlocks = useSelect( ( select ) => !!select( blockEditorStore ).getBlockCount(), [] );
+	const hasBlocks = useSelect(
+		(select) => !!select(blockEditorStore).getBlockCount(),
+		[]
+	);
 	const isEnabled = hasBlocks && !isDisabled;
 
 	return (
 		<Dropdown
 			contentClassName="block-editor-block-navigation__popover"
 			position="bottom right"
-			renderToggle={ ( { isOpen, onToggle } ) => (
+			renderToggle={({ isOpen, onToggle }) => (
 				<Button
-					{ ...props }
-					ref={ ref }
-					icon={ listView }
-					aria-expanded={ isOpen }
+					{...props}
+					ref={ref}
+					icon={listView}
+					aria-expanded={isOpen}
 					aria-haspopup="true"
-					onClick={ isEnabled ? onToggle : undefined }
+					onClick={isEnabled ? onToggle : undefined}
 					/* translators: button label text should, if possible, be under 16 characters. */
-					label={ __( 'List view' ) }
+					label={__('List view')}
 					className="block-editor-block-navigation"
-					aria-disabled={ !isEnabled }
+					aria-disabled={!isEnabled}
 				/>
-			) }
-			renderContent={ () => (
-				<ListViewSidebar canClose={ false } />
-			) }
+			)}
+			renderContent={() => <ListViewSidebar canClose={false} />}
 		/>
 	);
 }
 
-export default forwardRef( BlockNavigationDropdown );
+export default forwardRef(BlockNavigationDropdown);

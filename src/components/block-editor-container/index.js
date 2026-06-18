@@ -40,8 +40,8 @@ const SIZE_MEDIUM = 480;
 /**
  * Contains the block contents. Handles the hot-swapping of the redux stores, as well as applying the root CSS classes
  *
- * @param {Object} props - Component props
- * @param {Object} props.children - Child components
+ * @param {object} props - Component props
+ * @param {object} props.children - Child components
  * @param {boolean} props.isEditorReady - The editor is ready for editing
  * @param {boolean} props.isEditing - This editor is being edited in
  * @param {boolean} props.isPreview - Whether preview mode is enabled
@@ -57,48 +57,65 @@ const SIZE_MEDIUM = 480;
  * @param {OnUpdate} [props.onChange] - Gutenberg's onChange callback
  * @param {object[]} [props.blocks] - Gutenberg's blocks
  */
-function BlockEditorContainer( props ) {
-	const { children, settings, className, onError, renderMoreMenu, onLoad, onInput, onChange, blocks } = props;
-	const { isEditorReady, editorMode, isEditing, setEditing, fixedToolbar, isPreview } = props;
-	const [ resizeListener, { width } ] = useResizeObserver();
-	const classes = classnames( className, {
+function BlockEditorContainer(props) {
+	const {
+		children,
+		settings,
+		className,
+		onError,
+		renderMoreMenu,
+		onLoad,
+		onInput,
+		onChange,
+		blocks,
+	} = props;
+	const {
+		isEditorReady,
+		editorMode,
+		isEditing,
+		setEditing,
+		fixedToolbar,
+		isPreview,
+	} = props;
+	const [resizeListener, { width }] = useResizeObserver();
+	const classes = classnames(className, {
 		'iso-editor': true,
 
 		'is-large': width ? width >= SIZE_LARGE : false,
 		'is-medium': width ? width >= SIZE_MEDIUM && width < SIZE_LARGE : true,
 		'is-small': width ? width < SIZE_MEDIUM : false,
 
-		'iso-editor__loading': ! isEditorReady,
+		'iso-editor__loading': !isEditorReady,
 		'iso-editor__selected': isEditing,
 
 		// Match Gutenberg
 		'block-editor': true,
 		'edit-post-layout': true,
 		'has-fixed-toolbar': fixedToolbar,
-		[ 'is-mode-' + editorMode ]: true,
+		['is-mode-' + editorMode]: true,
 		'is-preview-mode': isPreview,
-	} );
+	});
 
 	return (
-		<div className={ classes }>
-			<ErrorBoundary onError={ onError }>
+		<div className={classes}>
+			<ErrorBoundary onError={onError}>
 				<HotSwapper />
 
-				{ resizeListener }
+				{resizeListener}
 
 				<ClickOutsideWrapper
-					onOutside={ () => setEditing( false ) }
-					onFocus={ () => ! isEditing && setEditing( true ) }
+					onOutside={() => setEditing(false)}
+					onFocus={() => !isEditing && setEditing(true)}
 				>
 					<BlockEditorContents
-						blocks={ blocks }
-						settings={ settings }
-						renderMoreMenu={ renderMoreMenu }
-						onLoad={ onLoad }
-						onInput={ onInput }
-						onChange={ onChange }
+						blocks={blocks}
+						settings={settings}
+						renderMoreMenu={renderMoreMenu}
+						onLoad={onLoad}
+						onInput={onInput}
+						onChange={onChange}
 					>
-						{ children }
+						{children}
 					</BlockEditorContents>
 				</ClickOutsideWrapper>
 			</ErrorBoundary>
@@ -106,25 +123,32 @@ function BlockEditorContainer( props ) {
 	);
 }
 
-export default compose( [
-	withSelect( ( select, { settings } ) => {
-		const { isEditorReady, getEditorMode, isEditing, isFeatureActive, isOptionActive } = select(
-			'isolated/editor'
-		);
+export default compose([
+	withSelect((select, { settings }) => {
+		const {
+			isEditorReady,
+			getEditorMode,
+			isEditing,
+			isFeatureActive,
+			isOptionActive,
+		} = select('isolated/editor');
 
 		return {
 			isEditorReady: isEditorReady(),
 			editorMode: getEditorMode(),
 			isEditing: isEditing(),
-			fixedToolbar: isFeatureActive( 'fixedToolbar', settings?.editor.hasFixedToolbar ),
-			isPreview: isOptionActive( 'preview' ),
+			fixedToolbar: isFeatureActive(
+				'fixedToolbar',
+				settings?.editor.hasFixedToolbar
+			),
+			isPreview: isOptionActive('preview'),
 		};
-	} ),
-	withDispatch( ( dispatch ) => {
-		const { setEditing } = dispatch( 'isolated/editor' );
+	}),
+	withDispatch((dispatch) => {
+		const { setEditing } = dispatch('isolated/editor');
 
 		return {
 			setEditing,
 		};
-	} ),
-] )( BlockEditorContainer );
+	}),
+])(BlockEditorContainer);

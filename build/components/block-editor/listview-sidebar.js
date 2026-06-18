@@ -29,6 +29,12 @@ var _jsxRuntime = require("react/jsx-runtime");
 
 var _unlock = (0, _unlock2.unlock)(_components.privateApis),
   Tabs = _unlock.Tabs;
+
+/**
+ *
+ * @param root0
+ * @param root0.canClose
+ */
 function ListViewSidebar(_ref) {
   var _ref$canClose = _ref.canClose,
     canClose = _ref$canClose === void 0 ? true : _ref$canClose;
@@ -77,6 +83,10 @@ function ListViewSidebar(_ref) {
    * @param {string} currentTab The current tab. Either list view or outline.
    *
    * @return void
+   */
+  /**
+   *
+   * @param currentTab
    */
   function handleSidebarFocus(currentTab) {
     // Tab panel focus.

@@ -21,7 +21,7 @@ var _i18n = require("@wordpress/i18n");
  * Convert a reusable block to a static block effect handler
  *
  * @param {string}  clientId Block ID.
- * @return {Object} control descriptor.
+ * @returns {object} control descriptor.
  */
 function convertBlockToStatic(clientId) {
   return {
@@ -34,7 +34,7 @@ function convertBlockToStatic(clientId) {
  * Convert a static block to a reusable block effect handler
  *
  * @param {Array}  clientIds Block IDs.
- * @return {Object} control descriptor.
+ * @returns {object} control descriptor.
  */
 function convertBlocksToReusable(clientIds) {
   return {
@@ -47,7 +47,7 @@ function convertBlocksToReusable(clientIds) {
  * Deletes a reusable block.
  *
  * @param {string} id Reusable block ID.
- * @return {Object} control descriptor.
+ * @returns {object} control descriptor.
  */
 function deleteReusableBlock(id) {
   return {

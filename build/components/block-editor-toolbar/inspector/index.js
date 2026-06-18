@@ -16,9 +16,18 @@ var _jsxRuntime = require("react/jsx-runtime");
  * Internal dependencies
  */
 
-function Inspector(_ref) {
+/**
+ *
+ * @param root0
+ * @param root0.button
+ * @param root0.onToggle
+ */function Inspector(_ref) {
   var button = _ref.button,
     onToggle = _ref.onToggle;
+  /**
+   *
+   * @param ev
+   */
   function onOutside(ev) {
     if (ev.target.closest('.block-editor-block-inspector') === null && !ev.target.classList.contains('iso-inspector')) {
       onToggle(false);

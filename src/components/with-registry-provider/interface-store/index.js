@@ -10,7 +10,7 @@ import reducer from './reducer';
  *
  * @see https://github.com/WordPress/gutenberg/blob/HEAD/packages/data/README.md#createReduxStore
  *
- * @type {Object}
+ * @type {object}
  */
 export default {
 	reducer,

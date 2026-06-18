@@ -77,6 +77,11 @@ function useEditorSetup(settings) {
     isEditing = _useSelect.isEditing,
     topToolbar = _useSelect.topToolbar,
     currentSettings = _useSelect.currentSettings;
+
+  /**
+   *
+   * @param newSettings
+   */
   function updateAllSettings(newSettings) {
     updateSettings(newSettings.editor);
     updateEditorSettings(newSettings.editor);

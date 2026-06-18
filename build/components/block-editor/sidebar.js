@@ -31,6 +31,11 @@ function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r
 
 var _unlock = (0, _unlock2.unlock)(_components.privateApis),
   Tabs = _unlock.Tabs;
+
+/**
+ *
+ * @param area
+ */
 function isActiveArea(area) {
   return [_sidebarHeading.sidebars.document, _sidebarHeading.sidebars.block].includes(area);
 }

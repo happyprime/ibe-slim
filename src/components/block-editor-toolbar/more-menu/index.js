@@ -41,27 +41,27 @@ const TOGGLE_PROPS = {
 /**
  * More menu
  *
- * @param {Object} props - Component props
+ * @param {object} props - Component props
  * @param {BlockEditorSettings} props.settings - Settings
  * @param {OnClose} props.onClick
  * @param {OnMore} props.renderMoreMenu
  */
-const MoreMenu = ( { settings, onClick, renderMoreMenu } ) => (
+const MoreMenu = ({ settings, onClick, renderMoreMenu }) => (
 	<DropdownMenu
 		className="edit-post-more-menu"
-		icon={ moreVertical }
-		label={ __( 'More tools & options' ) }
-		popoverProps={ POPOVER_PROPS }
-		toggleProps={ { ...TOGGLE_PROPS, onClick } }
+		icon={moreVertical}
+		label={__('More tools & options')}
+		popoverProps={POPOVER_PROPS}
+		toggleProps={{ ...TOGGLE_PROPS, onClick }}
 	>
-		{ ( { onClose } ) => (
+		{({ onClose }) => (
 			<>
-				{ renderMoreMenu && renderMoreMenu( settings, onClose ) }
-				<EditorMenu onClose={ onClose } settings={ settings } />
-				<WritingMenu onClose={ onClose } settings={ settings } />
-				<LinkMenu settings={ settings } />
+				{renderMoreMenu && renderMoreMenu(settings, onClose)}
+				<EditorMenu onClose={onClose} settings={settings} />
+				<WritingMenu onClose={onClose} settings={settings} />
+				<LinkMenu settings={settings} />
 			</>
-		) }
+		)}
 	</DropdownMenu>
 );
 

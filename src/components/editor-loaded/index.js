@@ -12,26 +12,26 @@ import { useSelect } from '@wordpress/data';
 /**
  * Used by clients to add an optional loading placeholder
  *
- * @param {Object} props - Component props
+ * @param {object} props - Component props
  * @param {OnLoad} [props.onLoaded] - Callback to signal that the editor has loaded
  * @param {OnLoad} [props.onLoading] - Callback to signal that the editor is loading
  */
-function EditorLoaded( { onLoaded, onLoading } ) {
+function EditorLoaded({ onLoaded, onLoading }) {
 	const { isEditorReady } = useSelect(
-		( select ) => ( {
+		(select) => ({
 			// @ts-ignore
-			isEditorReady: select( 'isolated/editor' ).isEditorReady(),
-		} ),
+			isEditorReady: select('isolated/editor').isEditorReady(),
+		}),
 		[]
 	);
 
-	useEffect( () => {
-		if ( isEditorReady ) {
+	useEffect(() => {
+		if (isEditorReady) {
 			onLoaded && onLoaded();
 		} else {
 			onLoading && onLoading();
 		}
-	}, [ isEditorReady ] );
+	}, [isEditorReady]);
 
 	return null;
 }

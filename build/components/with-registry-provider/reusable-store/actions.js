@@ -75,7 +75,7 @@ function __experimentalDeleteReusableBlock(id) {
  *
  * @param {string} clientId The clientID of the reusable block to target.
  * @param {boolean} isEditing Whether the block should be in editing state.
- * @return {Object} Action descriptor.
+ * @returns {object} Action descriptor.
  */
 function __experimentalSetEditingReusableBlock(clientId, isEditing) {
   return {

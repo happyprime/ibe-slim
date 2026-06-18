@@ -30,6 +30,11 @@ var _jsxRuntime = require("react/jsx-runtime");
 var preventDefault = function preventDefault(event) {
   event.preventDefault();
 };
+
+/**
+ *
+ * @param props
+ */
 function HeaderToolbar(props) {
   var _props$settings;
   var inserterButton = (0, _element.useRef)();

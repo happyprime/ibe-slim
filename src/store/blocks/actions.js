@@ -14,9 +14,9 @@ const actions = {
 	 * Update blocks without undo history
 	 *
 	 * @param {object[]} blocks
-	 * @param {Object} options
+	 * @param {object} options
 	 */
-	*updateBlocksWithUndo( blocks, options = {} ) {
+	*updateBlocksWithUndo(blocks, options = {}) {
 		return yield {
 			type: 'UPDATE_BLOCKS_WITH_UNDO',
 			blocks,
@@ -27,9 +27,9 @@ const actions = {
 	 * Update blocks without undo history
 	 *
 	 * @param {object[]} blocks
-	 * @param {Object} options
+	 * @param {object} options
 	 */
-	*updateBlocksWithoutUndo( blocks, options = {} ) {
+	*updateBlocksWithoutUndo(blocks, options = {}) {
 		return yield {
 			type: 'UPDATE_BLOCKS_WITHOUT_UNDO',
 			blocks,

@@ -45,7 +45,7 @@ var actions = {
    * Update blocks without undo history
    *
    * @param {object[]} blocks
-   * @param {Object} options
+   * @param {object} options
    */
   updateBlocksWithUndo: function updateBlocksWithUndo(blocks) {
     var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
@@ -71,7 +71,7 @@ var actions = {
    * Update blocks without undo history
    *
    * @param {object[]} blocks
-   * @param {Object} options
+   * @param {object} options
    */
   updateBlocksWithoutUndo: function updateBlocksWithoutUndo(blocks) {
     var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};

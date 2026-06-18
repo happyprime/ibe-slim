@@ -5,27 +5,33 @@
  * Note that store plugins are currently marked as deprecated. It's unknown what will replace them, and this will need to be updated
  * once that happens.
  *
- * @param {Object} registry
- * @param {Object} pluginOptions
+ * @param {object} registry
+ * @param {object} pluginOptions
  */
-function storeHotSwapPlugin( registry, pluginOptions ) {
-	const hotStores = [ 'core/block-editor', 'core/editor' ];
+function storeHotSwapPlugin(registry, pluginOptions) {
+	const hotStores = ['core/block-editor', 'core/editor'];
 
 	// Switch select and dispatch
 	return {
-		dispatch( reducerKey ) {
-			if ( storeHotSwapPlugin.targetDispatch === null || hotStores.indexOf( reducerKey ) === -1 ) {
-				return registry.dispatch( reducerKey );
+		dispatch(reducerKey) {
+			if (
+				storeHotSwapPlugin.targetDispatch === null ||
+				hotStores.indexOf(reducerKey) === -1
+			) {
+				return registry.dispatch(reducerKey);
 			}
 
-			return storeHotSwapPlugin.targetDispatch( reducerKey );
+			return storeHotSwapPlugin.targetDispatch(reducerKey);
 		},
-		select( reducerKey ) {
-			if ( storeHotSwapPlugin.targetSelect === null || hotStores.indexOf( reducerKey ) === -1 ) {
-				return registry.select( reducerKey );
+		select(reducerKey) {
+			if (
+				storeHotSwapPlugin.targetSelect === null ||
+				hotStores.indexOf(reducerKey) === -1
+			) {
+				return registry.select(reducerKey);
 			}
 
-			return storeHotSwapPlugin.targetSelect( reducerKey );
+			return storeHotSwapPlugin.targetSelect(reducerKey);
 		},
 	};
 }
@@ -33,7 +39,7 @@ function storeHotSwapPlugin( registry, pluginOptions ) {
 storeHotSwapPlugin.targetSelect = null;
 storeHotSwapPlugin.targetDispatch = null;
 
-storeHotSwapPlugin.setEditor = function ( select, dispatch ) {
+storeHotSwapPlugin.setEditor = function (select, dispatch) {
 	this.targetSelect = select;
 	this.targetDispatch = dispatch;
 };

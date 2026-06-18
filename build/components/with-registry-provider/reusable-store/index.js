@@ -19,7 +19,7 @@ function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r
  *
  * @see https://github.com/WordPress/gutenberg/blob/master/packages/data/README.md#registerStore
  *
- * @type {Object}
+ * @type {object}
  */
 var _default = exports["default"] = {
   actions: actions,

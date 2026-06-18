@@ -18,7 +18,7 @@ function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r
  *
  * @see https://github.com/WordPress/gutenberg/blob/HEAD/packages/data/README.md#createReduxStore
  *
- * @type {Object}
+ * @type {object}
  */
 var _default = exports["default"] = {
   reducer: _reducer["default"],

@@ -17,6 +17,12 @@ var _storeHotSwap = _interopRequireDefault(require("../../store/plugins/store-ho
  * Internal dependencies
  */
 
+/**
+ *
+ * @param root0
+ * @param root0.isEditing
+ * @param root0.hotSwap
+ */
 function HotSwapper(_ref) {
   var isEditing = _ref.isEditing,
     hotSwap = _ref.hotSwap;

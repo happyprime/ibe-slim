@@ -18,9 +18,9 @@ var _createSlotFill = (0, _components.createSlotFill)('IsolatedToolbar'),
 /**
  * A Toolbar slot/fill
  *
- * @param {Object} props Component props
- * @param {Object} props.children Child components to insert in the toolbar slot
- * @return object
+ * @param {object} props Component props
+ * @param {object} props.children Child components to insert in the toolbar slot
+ * @returns object
  */
 var ToolbarSlot = function ToolbarSlot(_ref) {
   var children = _ref.children;
