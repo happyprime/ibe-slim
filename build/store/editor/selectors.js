@@ -18,13 +18,8 @@ exports.isEditorSidebarOpened = void 0;
 exports.isIframePreview = isIframePreview;
 exports.isInserterOpened = isInserterOpened;
 exports.isListViewOpened = isListViewOpened;
-var _lodash = require("lodash");
 var _data = require("@wordpress/data");
 var _interface = require("@wordpress/interface");
-/**
- * External dependencies
- */
-
 /**
  * WordPress dependencies
  */
@@ -145,7 +140,7 @@ function isInserterOpened(state) {
 var isEditorSidebarOpened = exports.isEditorSidebarOpened = (0, _data.createRegistrySelector)(function (select) {
   return function () {
     var activeGeneralSidebar = select(_interface.store).getActiveComplementaryArea('isolated/editor');
-    return (0, _lodash.includes)(['edit-post/document', 'edit-post/block'], activeGeneralSidebar);
+    return ['edit-post/document', 'edit-post/block'].includes(activeGeneralSidebar);
   };
 });
 

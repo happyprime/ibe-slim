@@ -1,10 +1,5 @@
 // @ts-nocheck
 /**
- * External dependencies
- */
-import { includes } from 'lodash';
-
-/**
  * WordPress dependencies
  */
 import { Component } from '@wordpress/element';
@@ -35,7 +30,7 @@ function isFocusNormalizedButton( element ) {
 			return true;
 
 		case 'INPUT':
-			return includes( INPUT_BUTTON_TYPES, element.type );
+			return INPUT_BUTTON_TYPES.includes( element.type );
 	}
 
 	return false;
@@ -111,7 +106,7 @@ export default createHigherOrderComponent( ( WrappedComponent ) => {
 		normalizeButtonFocus( event ) {
 			const { type, target } = event;
 
-			const isInteractionEnd = includes( [ 'mouseup', 'touchend' ], type );
+			const isInteractionEnd = [ 'mouseup', 'touchend' ].includes( type );
 
 			if ( isInteractionEnd ) {
 				this.preventBlurCheck = false;

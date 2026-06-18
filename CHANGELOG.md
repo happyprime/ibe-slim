@@ -13,7 +13,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Dependencies
 - Remove all `@wordpress/*` packages from `dependencies`. They are provided by the host (WordPress/Gutenberg) at runtime via `window.wp.*` and are externalized by the consumer's build (`@wordpress/dependency-extraction-webpack-plugin`); this package never resolves them. The exact version pins were also the likely cause of needing `npm install --force`.
 - Remove `debug`, `lib0`, `memize`, and `uuid` — unused leftovers from the removed collaborative-editing (yjs) feature.
-- Remaining runtime dependencies are only what the build actually bundles: `classnames`, `redux-undo`, and `lodash`.
+- Replace the three `lodash` usages (`includes`, `flow`) with native JS and drop `lodash` from `dependencies`. Native `Array.prototype.includes` and a small inline composition cover all call sites, and it removes reliance on the deprecated `window.lodash` global.
+- Remaining runtime dependencies are only what the build actually bundles: `classnames` and `redux-undo`.
 
 ### Notes
 - Verified against Gutenberg 22.5.x (WordPress 7.0-era): all private/experimental block-editor and components exports this package unlocks (`ExperimentalBlockCanvas`, `useLayoutClasses`/`useLayoutStyles`/`LayoutStyle`, `__experimentalListView`, `__experimentalLibrary`, `__unstableUseTypewriter`, `__experimentalUseResizeCanvas`, `__experimentalRecursionProvider`, private `Tabs`, `__unstableMotion`) are still present.
