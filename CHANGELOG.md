@@ -11,11 +11,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Replace the unmaintained `react-autosize-textarea` dependency in the text/code editor with a native `<textarea>` (only standard attributes were used). Removes a bundled dependency that is not React 19 compatible.
 
 ### Dependencies
-- Remove all `@wordpress/*` packages from `dependencies`. They are provided by the host (WordPress/Gutenberg) at runtime via `window.wp.*` and are externalized by the consumer's build (`@wordpress/dependency-extraction-webpack-plugin`); this package never resolves them. The exact version pins were also the likely cause of needing `npm install --force`.
+- Remove the externalized `@wordpress/*` packages from `dependencies` (≈38 of them). They are provided by the host (WordPress/Gutenberg) at runtime via `window.wp.*` and are externalized by the consumer's build (`@wordpress/dependency-extraction-webpack-plugin`); this package never resolves them. The exact version pins were also the likely cause of needing `npm install --force`.
+- Keep the three `@wordpress/*` packages that are **not** externalized and are therefore bundled into the consumer: `@wordpress/icons` and `@wordpress/interface` (bundled JS) and `@wordpress/base-styles` (bundled SCSS). These must be declared so they resolve from a consumer that uses `npm link`/symlinks (a normal install previously resolved them only by dependency hoisting).
+- Declare `@babel/runtime` as a dependency. The Babel build (`@babel/plugin-transform-runtime`) emits `require('@babel/runtime/helpers/*')` in the output, so consumers must resolve it. It was previously satisfied only by hoisting and broke under `npm link`.
 - Remove `debug`, `lib0`, `memize`, and `uuid` — unused leftovers from the removed collaborative-editing (yjs) feature.
 - Replace the three `lodash` usages (`includes`, `flow`) with native JS and drop `lodash` from `dependencies`. Native `Array.prototype.includes` and a small inline composition cover all call sites, and it removes reliance on the deprecated `window.lodash` global.
-- Replace the `is-promise` dependency with a native thenable check (`typeof value.then === 'function'`). It was previously satisfied only transitively via the removed `@wordpress/*` packages.
-- Remaining runtime dependencies are only what the build actually bundles: `classnames` and `redux-undo`.
+- Replace the `is-promise` dependency with a native thenable check (`typeof value.then === 'function'`).
+- Final runtime/bundled dependencies: `@babel/runtime`, `@wordpress/base-styles`, `@wordpress/icons`, `@wordpress/interface`, `classnames`, `redux-undo`.
+
+### Styles
+- Update `@wordpress/base-styles` SCSS imports from the legacy underscore partial form (`@import '@wordpress/base-styles/_mixins'`) to the package's exported subpaths (`@import '@wordpress/base-styles/mixins'`). `@wordpress/base-styles` 10.x adds an `exports` map that the underscore form does not satisfy, which breaks the build under the exports-aware sass-loader in `@wordpress/scripts` 32+. The new form works with old and new base-styles.
 
 ### Tooling
 - Adopt `@happyprime/eslint-config` 1.0 (ESLint 9 / flat config). Adds an `eslint.config.mjs` and `lint`/`lint:fix` scripts. ESLint, the plugins, and `globals` come from the shared config's peer dependencies, so they are not declared here. Disables `react/display-name` for this package's pervasive HOC/Slot-Fill wrappers, and applies the shared Prettier formatting across `src/`.

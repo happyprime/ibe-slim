@@ -1,6 +1,6 @@
-@import "@wordpress/base-styles/_mixins";
-@import "@wordpress/base-styles/_variables";
-@import "@wordpress/base-styles/_colors";
+@import "@wordpress/base-styles/mixins";
+@import "@wordpress/base-styles/variables";
+@import "@wordpress/base-styles/colors";
 
 .iso-editor {
 	// Restrict the interface skeleton to our container, and not assume it's own a WP admin page

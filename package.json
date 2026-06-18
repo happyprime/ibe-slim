@@ -27,6 +27,10 @@
 	"author": "Happy Prime",
 	"license": "GPL-2.0-or-later",
 	"dependencies": {
+		"@babel/runtime": "^7.26.10",
+		"@wordpress/base-styles": "^10.0.1",
+		"@wordpress/icons": "^14.0.1",
+		"@wordpress/interface": "^9.33.1",
 		"classnames": "^2.5.1",
 		"redux-undo": "^1.1.0"
 	},
