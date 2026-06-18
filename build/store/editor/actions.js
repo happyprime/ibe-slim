@@ -121,12 +121,12 @@ var actions = {
    * @param {string} name Name of sidebar section
    */
   openGeneralSidebar: /*#__PURE__*/_regenerator["default"].mark(function openGeneralSidebar(name) {
-    return _regenerator["default"].wrap(function openGeneralSidebar$(_context) {
+    return _regenerator["default"].wrap(function (_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
-          _context.next = 2;
+          _context.next = 1;
           return _data.controls.dispatch(_interface.store, 'enableComplementaryArea', 'isolated/editor', name);
-        case 2:
+        case 1:
         case "end":
           return _context.stop();
       }
@@ -136,12 +136,12 @@ var actions = {
    * Close the sidebar (or popover)
    */
   closeGeneralSidebar: /*#__PURE__*/_regenerator["default"].mark(function closeGeneralSidebar() {
-    return _regenerator["default"].wrap(function closeGeneralSidebar$(_context2) {
+    return _regenerator["default"].wrap(function (_context2) {
       while (1) switch (_context2.prev = _context2.next) {
         case 0:
-          _context2.next = 2;
+          _context2.next = 1;
           return _data.controls.dispatch(_interface.store, 'disableComplementaryArea', 'isolated/editor');
-        case 2:
+        case 1:
         case "end":
           return _context2.stop();
       }

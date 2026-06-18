@@ -22,12 +22,12 @@ var _marked = /*#__PURE__*/_regenerator["default"].mark(__experimentalConvertBlo
  * @param {string} clientId The client ID of the block to attach.
  */
 function __experimentalConvertBlockToStatic(clientId) {
-  return _regenerator["default"].wrap(function __experimentalConvertBlockToStatic$(_context) {
+  return _regenerator["default"].wrap(function (_context) {
     while (1) switch (_context.prev = _context.next) {
       case 0:
-        _context.next = 2;
+        _context.next = 1;
         return (0, _controls.convertBlockToStatic)(clientId);
-      case 2:
+      case 1:
       case "end":
         return _context.stop();
     }
@@ -40,12 +40,12 @@ function __experimentalConvertBlockToStatic(clientId) {
  * @param {string[]} clientIds The client IDs of the block to detach.
  */
 function __experimentalConvertBlocksToReusable(clientIds) {
-  return _regenerator["default"].wrap(function __experimentalConvertBlocksToReusable$(_context2) {
+  return _regenerator["default"].wrap(function (_context2) {
     while (1) switch (_context2.prev = _context2.next) {
       case 0:
-        _context2.next = 2;
+        _context2.next = 1;
         return (0, _controls.convertBlocksToReusable)(clientIds);
-      case 2:
+      case 1:
       case "end":
         return _context2.stop();
     }
@@ -58,12 +58,12 @@ function __experimentalConvertBlocksToReusable(clientIds) {
  * @param {string} id The ID of the reusable block to delete.
  */
 function __experimentalDeleteReusableBlock(id) {
-  return _regenerator["default"].wrap(function __experimentalDeleteReusableBlock$(_context3) {
+  return _regenerator["default"].wrap(function (_context3) {
     while (1) switch (_context3.prev = _context3.next) {
       case 0:
-        _context3.next = 2;
+        _context3.next = 1;
         return (0, _controls.deleteReusableBlock)(id);
-      case 2:
+      case 1:
       case "end":
         return _context3.stop();
     }

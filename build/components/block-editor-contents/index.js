@@ -65,7 +65,7 @@ function getInitialContent(_x, _x2) {
 function _getInitialContent() {
   _getInitialContent = (0, _asyncToGenerator2["default"])(/*#__PURE__*/_regenerator["default"].mark(function _callee2(settings, loader) {
     var contentLoader;
-    return _regenerator["default"].wrap(function _callee2$(_context2) {
+    return _regenerator["default"].wrap(function (_context2) {
       while (1) switch (_context2.prev = _context2.next) {
         case 0:
           contentLoader = (0, _isPromise["default"])(loader) ? loader : new Promise(function (resolve) {
@@ -74,7 +74,7 @@ function _getInitialContent() {
           return _context2.abrupt("return", contentLoader.then(function (content) {
             return (0, _editorContent["default"])(settings.iso.patterns, settings.iso.currentPattern, settings.editor.template, content);
           }));
-        case 2:
+        case 1:
         case "end":
           return _context2.stop();
       }
@@ -99,19 +99,19 @@ function BlockEditorContents(props) {
     var loadData = /*#__PURE__*/function () {
       var _ref = (0, _asyncToGenerator2["default"])(/*#__PURE__*/_regenerator["default"].mark(function _callee() {
         var initialContent;
-        return _regenerator["default"].wrap(function _callee$(_context) {
+        return _regenerator["default"].wrap(function (_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
-              _context.next = 2;
+              _context.next = 1;
               return getInitialContent(settings, onLoad);
-            case 2:
+            case 1:
               initialContent = _context.sent;
               if (initialContent.length > 0 && (!blocks || blocks.length === 0)) {
                 onInput(initialContent, {
                   isInitialContent: true
                 });
               }
-            case 4:
+            case 2:
             case "end":
               return _context.stop();
           }

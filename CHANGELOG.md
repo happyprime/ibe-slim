@@ -10,6 +10,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Remove `event.persist()` in `with-focus-outside` (removed in React 19; a no-op since React 17).
 - Replace the unmaintained `react-autosize-textarea` dependency in the text/code editor with a native `<textarea>` (only standard attributes were used). Removes a bundled dependency that is not React 19 compatible.
 
+### Dependencies
+- Remove all `@wordpress/*` packages from `dependencies`. They are provided by the host (WordPress/Gutenberg) at runtime via `window.wp.*` and are externalized by the consumer's build (`@wordpress/dependency-extraction-webpack-plugin`); this package never resolves them. The exact version pins were also the likely cause of needing `npm install --force`.
+- Remove `debug`, `lib0`, `memize`, and `uuid` — unused leftovers from the removed collaborative-editing (yjs) feature.
+- Remaining runtime dependencies are only what the build actually bundles: `classnames`, `redux-undo`, and `lodash`.
+
 ### Notes
 - Verified against Gutenberg 22.5.x (WordPress 7.0-era): all private/experimental block-editor and components exports this package unlocks (`ExperimentalBlockCanvas`, `useLayoutClasses`/`useLayoutStyles`/`LayoutStyle`, `__experimentalListView`, `__experimentalLibrary`, `__unstableUseTypewriter`, `__experimentalUseResizeCanvas`, `__experimentalRecursionProvider`, private `Tabs`, `__unstableMotion`) are still present.
 
