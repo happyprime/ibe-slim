@@ -21,14 +21,19 @@ import * as editorSelectors from './editor/selectors';
 import * as preferenceSelectors from './preferences/selectors';
 import * as optionSelectors from './options/selectors';
 
-function storeConfig( preferencesKey, defaultPreferences ) {
+/**
+ *
+ * @param preferencesKey
+ * @param defaultPreferences
+ */
+function storeConfig(preferencesKey, defaultPreferences) {
 	return {
-		reducer: combineReducers( {
+		reducer: combineReducers({
 			blocks: blocksReducer,
 			editor: editorReducer,
 			preferences: preferencesReducer,
 			options: optionsReducer,
-		} ),
+		}),
 
 		actions: {
 			...blockActions,
@@ -44,15 +49,15 @@ function storeConfig( preferencesKey, defaultPreferences ) {
 			...optionSelectors,
 		},
 
-		persist: [ 'preferences' ],
+		persist: ['preferences'],
 
 		initialState: {
 			preferences: {
 				preferencesKey,
-				...( preferencesKey && localStorage.getItem( preferencesKey )
+				...(preferencesKey && localStorage.getItem(preferencesKey)
 					? // @ts-ignore
-					JSON.parse( localStorage.getItem( preferencesKey ) )
-					: defaultPreferences ),
+						JSON.parse(localStorage.getItem(preferencesKey))
+					: defaultPreferences),
 			},
 		},
 	};

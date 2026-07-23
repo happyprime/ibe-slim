@@ -2,10 +2,15 @@
  * WordPress dependencies
  */
 
-import { serialize, parse, createBlock, synchronizeBlocksWithTemplate } from '@wordpress/blocks';
+import {
+	serialize,
+	parse,
+	createBlock,
+	synchronizeBlocksWithTemplate,
+} from '@wordpress/blocks';
 
-const getPattern = ( patterns, currentPattern ) =>
-	patterns && patterns.find( ( item ) => item.name === currentPattern );
+const getPattern = (patterns, currentPattern) =>
+	patterns && patterns.find((item) => item.name === currentPattern);
 
 /** @typedef {import('../../index').IsoSettings} IsoSettings */
 
@@ -38,7 +43,7 @@ const getPattern = ( patterns, currentPattern ) =>
  * @property {boolean} isReady - is the editor ready?
  * @property {IsoSettings} settings - editor settings
  * @property {string} deviceType - current device type
- * @property {Object} canvasStyles - editor canvas styles
+ * @property {object} canvasStyles - editor canvas styles
  * @property {boolean} isIframePreview - whether the editor canvas is an iframe
  */
 
@@ -102,31 +107,33 @@ const DEFAULT_STATE = {
  * @param {Pattern[]} patterns - Array of patterns.
  * @param {string} currentPattern - Selected pattern name.
  * @param {object|null} gutenbergTemplate - Gutenberg template.
- * @return {string[]} Array of ignored HTML strings.
+ * @returns {string[]} Array of ignored HTML strings.
  */
-function getIgnoredContent( patterns, currentPattern, gutenbergTemplate ) {
+function getIgnoredContent(patterns, currentPattern, gutenbergTemplate) {
 	const ignored = [
-		serialize( createBlock( 'core/paragraph' ) ),
-		serialize( createBlock( 'core/paragraph', { className: '' } ) ),
+		serialize(createBlock('core/paragraph')),
+		serialize(createBlock('core/paragraph', { className: '' })),
 	];
-	const found = getPattern( patterns, currentPattern );
+	const found = getPattern(patterns, currentPattern);
 
 	// If we're using a starter pattern then add the empty pattern to our ignored content list
-	if ( found ) {
+	if (found) {
 		// We parse and then serialize so it will better match the formatting from Gutenberg when saving content
-		ignored.push( serialize( parse( found.content ) ) );
+		ignored.push(serialize(parse(found.content)));
 	}
 
 	// If we're using a Gutenberg template then add that to the ignored list
-	if ( gutenbergTemplate ) {
-		ignored.push( serialize( synchronizeBlocksWithTemplate( [], gutenbergTemplate ) ) );
+	if (gutenbergTemplate) {
+		ignored.push(
+			serialize(synchronizeBlocksWithTemplate([], gutenbergTemplate))
+		);
 	}
 
 	return ignored;
 }
 
-const reducer = ( state = DEFAULT_STATE, action ) => {
-	switch ( action.type ) {
+const reducer = (state = DEFAULT_STATE, action) => {
+	switch (action.type) {
 		case 'SETUP_EDITOR': {
 			const { currentPattern, patterns } = action.settings.iso;
 
@@ -134,7 +141,11 @@ const reducer = ( state = DEFAULT_STATE, action ) => {
 				...state,
 				patterns,
 				currentPattern,
-				ignoredContent: getIgnoredContent( patterns, currentPattern, action.settings.editor.template ),
+				ignoredContent: getIgnoredContent(
+					patterns,
+					currentPattern,
+					action.settings.editor.template
+				),
 				gutenbergTemplate: action.settings.editor.template,
 				settings: {
 					...state.settings,
@@ -147,7 +158,11 @@ const reducer = ( state = DEFAULT_STATE, action ) => {
 			return {
 				...state,
 				currentPattern: action.pattern,
-				ignoredContent: getIgnoredContent( state.patterns, action.pattern, state.gutenbergTemplate ),
+				ignoredContent: getIgnoredContent(
+					state.patterns,
+					action.pattern,
+					state.gutenbergTemplate
+				),
 			};
 
 		case 'SET_EDITOR_MODE':

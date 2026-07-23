@@ -21,7 +21,7 @@ var _i18n = require("@wordpress/i18n");
  * Convert a reusable block to a static block effect handler
  *
  * @param {string}  clientId Block ID.
- * @return {Object} control descriptor.
+ * @returns {object} control descriptor.
  */
 function convertBlockToStatic(clientId) {
   return {
@@ -34,7 +34,7 @@ function convertBlockToStatic(clientId) {
  * Convert a static block to a reusable block effect handler
  *
  * @param {Array}  clientIds Block IDs.
- * @return {Object} control descriptor.
+ * @returns {object} control descriptor.
  */
 function convertBlocksToReusable(clientIds) {
   return {
@@ -47,7 +47,7 @@ function convertBlocksToReusable(clientIds) {
  * Deletes a reusable block.
  *
  * @param {string} id Reusable block ID.
- * @return {Object} control descriptor.
+ * @returns {object} control descriptor.
  */
 function deleteReusableBlock(id) {
   return {
@@ -69,7 +69,7 @@ var controls = {
     return /*#__PURE__*/function () {
       var _ref3 = (0, _asyncToGenerator2["default"])(/*#__PURE__*/_regenerator["default"].mark(function _callee(_ref2) {
         var clientIds, reusableBlock, updatedRecord, newBlock;
-        return _regenerator["default"].wrap(function _callee$(_context) {
+        return _regenerator["default"].wrap(function (_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
               clientIds = _ref2.clientIds;
@@ -78,9 +78,9 @@ var controls = {
                 content: (0, _blocks.serialize)(registry.select('core/block-editor').getBlocksByClientId(clientIds)),
                 status: 'publish'
               };
-              _context.next = 4;
+              _context.next = 1;
               return registry.dispatch('core').saveEntityRecord('postType', 'wp_block', reusableBlock);
-            case 4:
+            case 1:
               updatedRecord = _context.sent;
               newBlock = (0, _blocks.createBlock)('core/block', {
                 ref: updatedRecord.id
@@ -89,7 +89,7 @@ var controls = {
               registry
               // @ts-ignore */}
               .dispatch(reusableBlocksStore).__experimentalSetEditingReusableBlock(newBlock.clientId, true);
-            case 8:
+            case 2:
             case "end":
               return _context.stop();
           }
@@ -104,17 +104,17 @@ var controls = {
     return /*#__PURE__*/function () {
       var _ref5 = (0, _asyncToGenerator2["default"])(/*#__PURE__*/_regenerator["default"].mark(function _callee2(_ref4) {
         var id, reusableBlock, allBlocks, associatedBlocks, associatedBlockClientIds;
-        return _regenerator["default"].wrap(function _callee2$(_context2) {
+        return _regenerator["default"].wrap(function (_context2) {
           while (1) switch (_context2.prev = _context2.next) {
             case 0:
               id = _ref4.id;
               reusableBlock = registry.select('core').getEditedEntityRecord('postType', 'wp_block', id); // Don't allow a reusable block with a temporary ID to be deleted
               if (reusableBlock) {
-                _context2.next = 4;
+                _context2.next = 1;
                 break;
               }
               return _context2.abrupt("return");
-            case 4:
+            case 1:
               // Remove any other blocks that reference this reusable block
               allBlocks = registry.select('core/block-editor').getBlocks();
               associatedBlocks = allBlocks.filter(function (block) {
@@ -126,9 +126,9 @@ var controls = {
               if (associatedBlockClientIds.length) {
                 registry.dispatch('core/block-editor').removeBlocks(associatedBlockClientIds);
               }
-              _context2.next = 10;
+              _context2.next = 2;
               return registry.dispatch('core').deleteEntityRecord('postType', 'wp_block', id);
-            case 10:
+            case 2:
             case "end":
               return _context2.stop();
           }

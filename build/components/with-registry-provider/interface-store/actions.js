@@ -22,7 +22,7 @@ function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t =
  * @param {string} scope Complementary area scope.
  * @param {string} area  Area identifier.
  *
- * @return {Object} Action object.
+ * @returns {object} Action object.
  */
 var setDefaultComplementaryArea = exports.setDefaultComplementaryArea = function setDefaultComplementaryArea(scope, area) {
   return {
@@ -79,7 +79,7 @@ var disableComplementaryArea = exports.disableComplementaryArea = function disab
  * @param {string} scope Item scope.
  * @param {string} item  Item identifier.
  *
- * @return {Object} Action object.
+ * @returns {object} Action object.
  */
 var pinItem = exports.pinItem = function pinItem(scope, item) {
   return function (_ref3) {
@@ -141,7 +141,7 @@ function toggleFeature(scope, featureName) {
  * @param {string}  featureName The feature name.
  * @param {boolean} value       The value to set.
  *
- * @return {Object} Action object.
+ * @returns {object} Action object.
  */
 function setFeatureValue(scope, featureName, value) {
   return function (_ref6) {
@@ -160,7 +160,7 @@ function setFeatureValue(scope, featureName, value) {
  * @param {string}                  scope    The feature scope (e.g. core/edit-post).
  * @param {Object<string, boolean>} defaults A key/value map of feature names to values.
  *
- * @return {Object} Action object.
+ * @returns {object} Action object.
  */
 function setFeatureDefaults(scope, defaults) {
   return function (_ref7) {

@@ -11,7 +11,17 @@ import { store as interfaceStore } from '@wordpress/interface';
  */
 import { closeSmall } from '@wordpress/icons';
 
-function ComplementaryAreaToggle( {
+/**
+ *
+ * @param root0
+ * @param root0.as
+ * @param root0.scope
+ * @param root0.identifier
+ * @param root0.icon
+ * @param root0.selectedIcon
+ * @param root0.name
+ */
+function ComplementaryAreaToggle({
 	as = Button,
 	scope,
 	identifier,
@@ -19,61 +29,61 @@ function ComplementaryAreaToggle( {
 	selectedIcon,
 	name,
 	...props
-} ) {
+}) {
 	const ComponentToUse = as;
 	const isSelected = useSelect(
-		( select ) =>
+		(select) =>
 			// @ts-ignore
-			select( interfaceStore ).getActiveComplementaryArea( scope ) ===
+			select(interfaceStore).getActiveComplementaryArea(scope) ===
 			identifier,
-		[ identifier ]
+		[identifier]
 	);
 	const { enableComplementaryArea, disableComplementaryArea } =
-		useDispatch( interfaceStore );
+		useDispatch(interfaceStore);
 	return (
 		<ComponentToUse
-			icon={ selectedIcon && isSelected ? selectedIcon : icon }
-			onClick={ () => {
-				if ( isSelected ) {
-					disableComplementaryArea( scope );
+			icon={selectedIcon && isSelected ? selectedIcon : icon}
+			onClick={() => {
+				if (isSelected) {
+					disableComplementaryArea(scope);
 				} else {
-					enableComplementaryArea( scope, identifier );
+					enableComplementaryArea(scope, identifier);
 				}
-			} }
-			{ ...props }
+			}}
+			{...props}
 		/>
 	);
 }
 
-const ComplementaryAreaHeader = ( {
+const ComplementaryAreaHeader = ({
 	smallScreenTitle,
 	children,
 	className,
 	toggleButtonProps,
-} ) => {
+}) => {
 	const toggleButton = (
-		<ComplementaryAreaToggle icon={ closeSmall } { ...toggleButtonProps } />
+		<ComplementaryAreaToggle icon={closeSmall} {...toggleButtonProps} />
 	);
 	return (
 		<>
 			<div className="components-panel__header interface-complementary-area-header__small">
-				{ smallScreenTitle && (
+				{smallScreenTitle && (
 					<span className="interface-complementary-area-header__small-title">
-						{ smallScreenTitle }
+						{smallScreenTitle}
 					</span>
-				) }
-				{ toggleButton }
+				)}
+				{toggleButton}
 			</div>
 			<div
-				className={ classnames(
+				className={classnames(
 					'components-panel__header',
 					'interface-complementary-area-header',
 					className
-				) }
-				tabIndex={ -1 }
+				)}
+				tabIndex={-1}
 			>
-				{ children }
-				{ toggleButton }
+				{children}
+				{toggleButton}
 			</div>
 		</>
 	);

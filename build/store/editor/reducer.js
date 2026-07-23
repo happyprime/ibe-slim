@@ -48,7 +48,7 @@ var getPattern = function getPattern(patterns, currentPattern) {
  * @property {boolean} isReady - is the editor ready?
  * @property {IsoSettings} settings - editor settings
  * @property {string} deviceType - current device type
- * @property {Object} canvasStyles - editor canvas styles
+ * @property {object} canvasStyles - editor canvas styles
  * @property {boolean} isIframePreview - whether the editor canvas is an iframe
  */
 
@@ -109,7 +109,7 @@ var DEFAULT_STATE = {
  * @param {Pattern[]} patterns - Array of patterns.
  * @param {string} currentPattern - Selected pattern name.
  * @param {object|null} gutenbergTemplate - Gutenberg template.
- * @return {string[]} Array of ignored HTML strings.
+ * @returns {string[]} Array of ignored HTML strings.
  */
 function getIgnoredContent(patterns, currentPattern, gutenbergTemplate) {
   var ignored = [(0, _blocks.serialize)((0, _blocks.createBlock)('core/paragraph')), (0, _blocks.serialize)((0, _blocks.createBlock)('core/paragraph', {

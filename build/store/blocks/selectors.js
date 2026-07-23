@@ -16,8 +16,8 @@ var _selectors = require("../editor/selectors");
 /**
  * Get blocks from edit history
  *
- * @param {Object} state - Current state
- * @return {object[]}
+ * @param {object} state - Current state
+ * @returns {object[]}
  */
 function getBlocks(state) {
   return state.blocks.present.blocks;
@@ -26,8 +26,8 @@ function getBlocks(state) {
 /**
  * Get selection
  *
- * @param {Object} state - Current state
- * @return {Object}
+ * @param {object} state - Current state
+ * @returns {object}
  */
 function getEditorSelection(state) {
   return state.blocks.present.selection;
@@ -36,8 +36,8 @@ function getEditorSelection(state) {
 /**
  * Is undo possible?
  *
- * @param {Object} state - Current state
- * @return {boolean}
+ * @param {object} state - Current state
+ * @returns {boolean}
  */
 function hasEditorUndo(state) {
   if ((0, _selectors.getEditorMode)(state) !== 'visual') return false;
@@ -47,8 +47,8 @@ function hasEditorUndo(state) {
 /**
  * Is redo possible?
  *
- * @param {Object} state - Current state
- * @return {boolean}
+ * @param {object} state - Current state
+ * @returns {boolean}
  */
 function hasEditorRedo(state) {
   if ((0, _selectors.getEditorMode)(state) !== 'visual') return false;
@@ -58,8 +58,8 @@ function hasEditorRedo(state) {
 /**
  * Get current edit count
  *
- * @param {Object} state - Current state
- * @return {number}
+ * @param {object} state - Current state
+ * @returns {number}
  */
 function getEditCount(state) {
   return state.blocks.present.editCount;

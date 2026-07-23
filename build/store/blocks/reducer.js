@@ -22,6 +22,12 @@ var DEFAULT_STATE = {
 var groupBy = function groupBy(action, currentState, previousHistory) {
   return currentState.editCount;
 };
+
+/**
+ *
+ * @param blocks
+ * @param selection
+ */
 function getSelectedBlock(blocks, selection) {
   return blocks.find(function (block) {
     return block.clientId === selection.clientId;
@@ -29,6 +35,11 @@ function getSelectedBlock(blocks, selection) {
 }
 
 // Gutenberg triggers a UPDATE_BLOCKS_WITH_UNDO one second after typing. Try and group this with the previous edits
+/**
+ *
+ * @param action
+ * @param state
+ */
 function isNewUndo(action, state) {
   var type = action.type,
     selection = action.selection;

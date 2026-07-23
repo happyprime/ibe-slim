@@ -18,13 +18,8 @@ exports.isEditorSidebarOpened = void 0;
 exports.isIframePreview = isIframePreview;
 exports.isInserterOpened = isInserterOpened;
 exports.isListViewOpened = isListViewOpened;
-var _lodash = require("lodash");
 var _data = require("@wordpress/data");
 var _interface = require("@wordpress/interface");
-/**
- * External dependencies
- */
-
 /**
  * WordPress dependencies
  */
@@ -38,7 +33,7 @@ var _interface = require("@wordpress/interface");
  * Get current editor mode
  *
  * @param {{editor: EditorState}} state - Current state
- * @return {EditorMode}
+ * @returns {EditorMode}
  */
 function getEditorMode(state) {
   return state.editor.editorMode;
@@ -48,7 +43,7 @@ function getEditorMode(state) {
  * Get current editor settings
  *
  * @param {{editor: EditorState}} state - Current state
- * @return {IsoSettings}
+ * @returns {IsoSettings}
  */
 function getEditorSettings(state) {
   return state.editor.settings;
@@ -58,7 +53,7 @@ function getEditorSettings(state) {
  * Is the editor ready for use?
  *
  * @param {{editor: EditorState}} state - Current state
- * @return {boolean}
+ * @returns {boolean}
  */
 function isEditorReady(state) {
   return state.editor.isReady;
@@ -68,7 +63,7 @@ function isEditorReady(state) {
  * Get current pattern name
  *
  * @param {{editor: EditorState}} state - Current state
- * @return {string|null}
+ * @returns {string|null}
  */
 function getCurrentPatternName(state) {
   return state.editor.currentPattern;
@@ -78,7 +73,7 @@ function getCurrentPatternName(state) {
  * Get current pattern
  *
  * @param {{editor: EditorState}} state - Current state
- * @return {Pattern|null}
+ * @returns {Pattern|null}
  */
 function getCurrentPattern(state) {
   var _state$editor = state.editor,
@@ -98,7 +93,7 @@ function getCurrentPattern(state) {
  * Get all ignored content
  *
  * @param {{editor: EditorState}} state - Current state
- * @return {string[]}
+ * @returns {string[]}
  */
 function getIgnoredContent(state) {
   return state.editor.ignoredContent;
@@ -109,7 +104,7 @@ function getIgnoredContent(state) {
  *
  * @param {{editor: EditorState}} state - Current state
  * @param patternName
- * @return {Pattern|null}
+ * @returns {Pattern|null}
  */
 function getNamedPattern(state, patternName) {
   var _state$editor$pattern = state.editor.patterns,
@@ -137,7 +132,7 @@ function getNamedPattern(state, patternName) {
  * Is the block inserter open?
  *
  * @param {{editor: EditorState}} state - Current state
- * @return {boolean}
+ * @returns {boolean}
  */
 function isInserterOpened(state) {
   return state.editor.isInserterOpened;
@@ -145,7 +140,7 @@ function isInserterOpened(state) {
 var isEditorSidebarOpened = exports.isEditorSidebarOpened = (0, _data.createRegistrySelector)(function (select) {
   return function () {
     var activeGeneralSidebar = select(_interface.store).getActiveComplementaryArea('isolated/editor');
-    return (0, _lodash.includes)(['edit-post/document', 'edit-post/block'], activeGeneralSidebar);
+    return ['edit-post/document', 'edit-post/block'].includes(activeGeneralSidebar);
   };
 });
 
@@ -153,7 +148,7 @@ var isEditorSidebarOpened = exports.isEditorSidebarOpened = (0, _data.createRegi
  * Are we editing this editor?
  *
  * @param {{editor: EditorState}} state - Current state
- * @return {boolean}
+ * @returns {boolean}
  */
 function isEditing(state) {
   return state.editor.isEditing;
@@ -163,7 +158,7 @@ function isEditing(state) {
  * Get all patterns
  *
  * @param {{editor: EditorState}} state - Current state
- * @return {Pattern[]}
+ * @returns {Pattern[]}
  */
 function getPatterns(state) {
   return state.editor.patterns;
@@ -173,7 +168,7 @@ function getPatterns(state) {
  * Determine if the list viewer is open
  *
  * @param {{editor: EditorState}} state - Current state
- * @return {boolean}
+ * @returns {boolean}
  */
 function isListViewOpened(state) {
   return state.editor.isListViewOpened;
@@ -183,7 +178,7 @@ function isListViewOpened(state) {
  * Return current device type
  *
  * @param {{editor: EditorState}} state - Current state
- * @return {string}
+ * @returns {string}
  */
 function getPreviewDeviceType(state) {
   return state.editor.deviceType;
@@ -193,7 +188,7 @@ function getPreviewDeviceType(state) {
  * Return editor canvas styles
  *
  * @param {{editor: EditorState}} state - Current state
- * @return {Object} editor canvas styles
+ * @returns {object} editor canvas styles
  */
 function getCanvasStyles(state) {
   return state.editor.canvasStyles;
@@ -203,7 +198,7 @@ function getCanvasStyles(state) {
  * Whether the editor canvas is an iframe
  *
  * @param {{editor: EditorState}} state - Current state
- * @return {boolean} whether the editor canvas is an iframe
+ * @returns {boolean} whether the editor canvas is an iframe
  */
 function isIframePreview(state) {
   return state.editor.isIframePreview || ['Tablet', 'Mobile'].includes(state.editor.deviceType);

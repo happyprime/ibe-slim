@@ -29,82 +29,95 @@ import getEditorSettings from './editor-settings';
  *
  * @param {BlockEditorSettings} settings - Settings
  */
-export default function useEditorSetup( settings ) {
+export default function useEditorSetup(settings) {
 	// @ts-ignore
-	const { undo, setupEditor } = useDispatch( 'isolated/editor' );
-	const { updateEditorSettings, setEditedPost: setupCoreEditor } = useDispatch( 'core/editor' );
-	const { updateSettings } = useDispatch( 'core/block-editor' );
-	const { isEditing, topToolbar, currentSettings } = useSelect( ( select ) => {
-		const { isEditing: isEditingSelect, isFeatureActive } = select( 'isolated/editor' );
-		// @ts-ignore
-		const { getBlockTypes } = select( blocksStore );
-		const blockTypes = getBlockTypes();
-		// @ts-ignore
-		const hasFixedToolbar = isFeatureActive( 'fixedToolbar', settings?.editor.hasFixedToolbar );
-
-		return {
+	const { undo, setupEditor } = useDispatch('isolated/editor');
+	const { updateEditorSettings, setEditedPost: setupCoreEditor } =
+		useDispatch('core/editor');
+	const { updateSettings } = useDispatch('core/block-editor');
+	const { isEditing, topToolbar, currentSettings } = useSelect(
+		(select) => {
+			const { isEditing: isEditingSelect, isFeatureActive } =
+				select('isolated/editor');
 			// @ts-ignore
-			isEditing: isEditingSelect(),
-			topToolbar: hasFixedToolbar,
-			currentSettings: {
-				...settings,
+			const { getBlockTypes } = select(blocksStore);
+			const blockTypes = getBlockTypes();
+			// @ts-ignore
+			const hasFixedToolbar = isFeatureActive(
+				'fixedToolbar',
+				settings?.editor.hasFixedToolbar
+			);
 
-				editor: {
-					...getEditorSettings(
-						// @ts-ignore
-						settings.editor,
-						settings.iso,
-						blockTypes,
-						// Use the default preference, if set, otherwise use the feature
-						settings.iso?.defaultPreferences?.fixedToolbar !== undefined
-							? settings.iso?.defaultPreferences?.fixedToolbar
-							: hasFixedToolbar
-					),
+			return {
+				// @ts-ignore
+				isEditing: isEditingSelect(),
+				topToolbar: hasFixedToolbar,
+				currentSettings: {
+					...settings,
 
-					// Reusable blocks
-					__experimentalReusableBlocks: [],
-					__experimentalFetchReusableBlocks: false,
+					editor: {
+						...getEditorSettings(
+							// @ts-ignore
+							settings.editor,
+							settings.iso,
+							blockTypes,
+							// Use the default preference, if set, otherwise use the feature
+							settings.iso?.defaultPreferences?.fixedToolbar !==
+								undefined
+								? settings.iso?.defaultPreferences?.fixedToolbar
+								: hasFixedToolbar
+						),
 
-					// Experimental undo, to do some experimental things
-					__experimentalUndo: undo
+						// Reusable blocks
+						__experimentalReusableBlocks: [],
+						__experimentalFetchReusableBlocks: false,
+
+						// Experimental undo, to do some experimental things
+						__experimentalUndo: undo,
+					},
 				},
-			}
-		};
-	}, [ settings ] );
+			};
+		},
+		[settings]
+	);
 
-	function updateAllSettings( newSettings ) {
-		updateSettings( newSettings.editor );
-		updateEditorSettings( newSettings.editor );
+	/**
+	 *
+	 * @param newSettings
+	 */
+	function updateAllSettings(newSettings) {
+		updateSettings(newSettings.editor);
+		updateEditorSettings(newSettings.editor);
 	}
 
 	// This is the initial setup
-	useEffect( () => {
+	useEffect(() => {
 		// Ensure we always have a __editorAssets value - Gutenberg hardcoded assets
 		// @ts-ignore
-		if ( window.__editorAssets === undefined ) {
+		if (window.__editorAssets === undefined) {
 			// @ts-ignore
 			window.__editorAssets = { styles: '', scripts: '' };
 		}
 
 		// Setup the Isolated Editor & Gutenberg
-		setupEditor( currentSettings );
+		setupEditor(currentSettings);
 
 		// And Gutenberg
-		updateAllSettings( currentSettings );
+		updateAllSettings(currentSettings);
 
 		// Set up the post entities with some dummy data, ensuring that anything that uses post entities can work
 		setupCoreEditor('post', 0);
-	}, [] );
+	}, []);
 
 	// Run whenever the editor is focussed, or the topToolbar setting or reusable blocks change
-	useEffect( () => {
-		if ( !isEditing ) {
+	useEffect(() => {
+		if (!isEditing) {
 			return;
 		}
 
 		// Setup Gutenberg for this editor, but only when focussed. This swaps allowed blocks and other capabilities
-		updateSettings( currentSettings );
-	}, [ isEditing, topToolbar, currentSettings?.editor?.reusableBlocks ] );
+		updateSettings(currentSettings);
+	}, [isEditing, topToolbar, currentSettings?.editor?.reusableBlocks]);
 
 	return settings;
 }

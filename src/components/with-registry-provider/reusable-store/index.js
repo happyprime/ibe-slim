@@ -11,7 +11,7 @@ import * as selectors from './selectors';
  *
  * @see https://github.com/WordPress/gutenberg/blob/master/packages/data/README.md#registerStore
  *
- * @type {Object}
+ * @type {object}
  */
 export default {
 	actions,

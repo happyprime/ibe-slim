@@ -2,7 +2,7 @@
  * WordPress dependencies
  */
 
-import {	BlockToolbar } from '@wordpress/block-editor';
+import { BlockToolbar } from '@wordpress/block-editor';
 import { useEffect, useRef, useState } from '@wordpress/element';
 import { Button, Popover } from '@wordpress/components';
 import { cog, next, previous } from '@wordpress/icons';
@@ -31,152 +31,180 @@ import './style.scss';
 /**
  * Block editor toolbar
  *
- * @param {Object} props - Component props
+ * @param {object} props - Component props
  * @param {BlockEditorSettings} props.settings - Settings
  * @param {EditorMode} props.editorMode - Visual or code?
  * @param {OnMore} props.renderMoreMenu - Callback to render additional items in the more menu
  */
-const BlockEditorToolbar = ( props ) => {
-	const ref = useRef( null );
+const BlockEditorToolbar = (props) => {
+	const ref = useRef(null);
 	const { settings, editorMode, renderMoreMenu } = props;
-	const isHugeViewport = useViewportMatch( 'huge', '>=' );
+	const isHugeViewport = useViewportMatch('huge', '>=');
 	const blockToolbarRef = useRef();
-	const isLargeViewport = useViewportMatch( 'medium' );
+	const isLargeViewport = useViewportMatch('medium');
 	const { inspector } = settings.iso?.toolbar || {};
 	const { moreMenu } = settings.iso || {};
 	const inspectorInSidebar = settings?.iso?.sidebar?.inspector || false;
-	const { openGeneralSidebar, closeGeneralSidebar } = useDispatch( 'isolated/editor' );
-	const { setIsInserterOpened } = useDispatch( 'isolated/editor' );
-	const { isEditorSidebarOpened, isBlockSelected, hasBlockSelected, isInserterOpened, isEditing } = useSelect(
-		( select ) => ( {
-			isEditing: select( 'isolated/editor' ),
+	const { openGeneralSidebar, closeGeneralSidebar } =
+		useDispatch('isolated/editor');
+	const { setIsInserterOpened } = useDispatch('isolated/editor');
+	const {
+		isEditorSidebarOpened,
+		isBlockSelected,
+		hasBlockSelected,
+		isInserterOpened,
+		isEditing,
+	} = useSelect(
+		(select) => ({
+			isEditing: select('isolated/editor'),
 			// @ts-ignore
-			isEditorSidebarOpened: select( 'isolated/editor' ).isEditorSidebarOpened(),
+			isEditorSidebarOpened:
+				select('isolated/editor').isEditorSidebarOpened(),
 			// @ts-ignore
-			isBlockSelected: !! select( 'core/block-editor' ).getBlockSelectionStart(),
+			isBlockSelected:
+				!!select('core/block-editor').getBlockSelectionStart(),
 			// @ts-ignore
-			hasBlockSelected: !! select( 'core/block-editor' ).getBlockSelectionStart(),
+			hasBlockSelected:
+				!!select('core/block-editor').getBlockSelectionStart(),
 			// @ts-ignore
-			isInserterOpened: select( 'isolated/editor' ).isInserterOpened(),
-		} ),
+			isInserterOpened: select('isolated/editor').isInserterOpened(),
+		}),
 		[]
 	);
 
-	const [ isBlockToolsCollapsed, setIsBlockToolsCollapsed ] =
-		useState( true );
+	const [isBlockToolsCollapsed, setIsBlockToolsCollapsed] = useState(true);
 
-	useEffect( () => {
+	useEffect(() => {
 		// If we have a new block selection, show the block tools
-		if ( isBlockSelected ) {
-			setIsBlockToolsCollapsed( false );
+		if (isBlockSelected) {
+			setIsBlockToolsCollapsed(false);
 		}
-	}, [ isBlockSelected ] );
+	}, [isBlockSelected]);
 
-	function toggleSidebar( isOpen ) {
-		if ( ! isOpen ) {
+	/**
+	 *
+	 * @param isOpen
+	 */
+	function toggleSidebar(isOpen) {
+		if (!isOpen) {
 			closeGeneralSidebar();
 		} else {
-			openGeneralSidebar( hasBlockSelected ? 'edit-post/block' : 'edit-post/document' );
+			openGeneralSidebar(
+				hasBlockSelected ? 'edit-post/block' : 'edit-post/document'
+			);
 		}
 	}
 
 	// If in popover mode then ensure the sidebar is closed when the editor is first started. This is because the complimentary area status
 	// is saved to localStorage, and it might have been left open when in sidebar mode.
-	useEffect( () => {
-		if ( ! inspectorInSidebar ) {
+	useEffect(() => {
+		if (!inspectorInSidebar) {
 			closeGeneralSidebar();
 		}
-	}, [] );
+	}, []);
 
-	useEffect( () => {
+	useEffect(() => {
 		// Close the block inspector when no block is selected. Gutenberg gets a bit crashy otherwise
-		if ( ! inspectorInSidebar && ! isEditing && ! isBlockSelected && isEditorSidebarOpened ) {
+		if (
+			!inspectorInSidebar &&
+			!isEditing &&
+			!isBlockSelected &&
+			isEditorSidebarOpened
+		) {
 			closeGeneralSidebar();
 		}
-	}, [ isEditing ] );
+	}, [isEditing]);
 
 	// Inserter and Sidebars are mutually exclusive
-	useEffect( () => {
-		if ( isEditorSidebarOpened && ! isHugeViewport ) {
-			setIsInserterOpened( false );
+	useEffect(() => {
+		if (isEditorSidebarOpened && !isHugeViewport) {
+			setIsInserterOpened(false);
 		}
-	}, [ isEditorSidebarOpened, isHugeViewport ] );
-	useEffect( () => {
-		if ( isInserterOpened && ( ! isHugeViewport || ! inspectorInSidebar ) ) {
+	}, [isEditorSidebarOpened, isHugeViewport]);
+	useEffect(() => {
+		if (isInserterOpened && (!isHugeViewport || !inspectorInSidebar)) {
 			closeGeneralSidebar();
 		}
-	}, [ isInserterOpened, isHugeViewport ] );
+	}, [isInserterOpened, isHugeViewport]);
 
 	return (
-		<div className="edit-post-editor-regions__header" role="region" tabIndex={ -1 }>
+		<div
+			className="edit-post-editor-regions__header"
+			role="region"
+			tabIndex={-1}
+		>
 			<div className="edit-post-header">
 				<div className="edit-post-header__toolbar">
-					<HeaderToolbar settings={ settings } />
-					{ isLargeViewport && (
+					<HeaderToolbar settings={settings} />
+					{isLargeViewport && (
 						<>
 							<div
-								className={ classnames(
+								className={classnames(
 									'editor-collapsible-block-toolbar',
 									'selected-block-tools-wrapper',
 									{
 										'is-collapsed': isBlockToolsCollapsed,
 									}
-								) }
+								)}
 							>
 								<BlockToolbar hideDragHandle />
 							</div>
 							{
 								// @ts-ignore
 								<Popover.Slot
-									ref={ blockToolbarRef }
+									ref={blockToolbarRef}
 									name="block-toolbar"
 								/>
 							}
-							{ isBlockSelected && (
+							{isBlockSelected && (
 								<Button
 									className="edit-post-header__block-tools-toggle"
-									icon={ isBlockToolsCollapsed ? next : previous }
-									onClick={ () => {
+									icon={
+										isBlockToolsCollapsed ? next : previous
+									}
+									onClick={() => {
 										setIsBlockToolsCollapsed(
-											( collapsed ) => ! collapsed
+											(collapsed) => !collapsed
 										);
-									} }
+									}}
 									label={
 										isBlockToolsCollapsed
-											? __( 'Show block tools' )
-											: __( 'Hide block tools' )
+											? __('Show block tools')
+											: __('Hide block tools')
 									}
 								/>
-							) }
+							)}
 						</>
-					) }
+					)}
 				</div>
 
-				<div className="edit-post-header__settings" ref={ ref }>
+				<div className="edit-post-header__settings" ref={ref}>
 					<ToolbarSlot.Slot />
 
-					{ inspector && (
+					{inspector && (
 						<Button
-							icon={ cog }
-							label={ __( 'Settings' ) }
-							onClick={ () => toggleSidebar( ! isEditorSidebarOpened ) }
-							isPressed={ isEditorSidebarOpened }
-							aria-expanded={ isEditorSidebarOpened }
-							disabled={ editorMode === 'text' }
+							icon={cog}
+							label={__('Settings')}
+							onClick={() =>
+								toggleSidebar(!isEditorSidebarOpened)
+							}
+							isPressed={isEditorSidebarOpened}
+							aria-expanded={isEditorSidebarOpened}
+							disabled={editorMode === 'text'}
 						/>
-					) }
+					)}
 
-					{ isEditorSidebarOpened && ! inspectorInSidebar && (
-						<Inspector button={ ref } onToggle={ toggleSidebar } />
-					) }
+					{isEditorSidebarOpened && !inspectorInSidebar && (
+						<Inspector button={ref} onToggle={toggleSidebar} />
+					)}
 
-					{ moreMenu && (
+					{moreMenu && (
 						<MoreMenu
-							settings={ settings }
-							onClick={ () => closeGeneralSidebar() }
-							renderMoreMenu={ renderMoreMenu }
+							settings={settings}
+							onClick={() => closeGeneralSidebar()}
+							renderMoreMenu={renderMoreMenu}
 						/>
-					) }
+					)}
 				</div>
 			</div>
 		</div>

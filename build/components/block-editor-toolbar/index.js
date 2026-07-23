@@ -39,7 +39,7 @@ var _jsxRuntime = require("react/jsx-runtime");
 /**
  * Block editor toolbar
  *
- * @param {Object} props - Component props
+ * @param {object} props - Component props
  * @param {BlockEditorSettings} props.settings - Settings
  * @param {EditorMode} props.editorMode - Visual or code?
  * @param {OnMore} props.renderMoreMenu - Callback to render additional items in the more menu
@@ -90,6 +90,11 @@ var _jsxRuntime = require("react/jsx-runtime");
       setIsBlockToolsCollapsed(false);
     }
   }, [isBlockSelected]);
+
+  /**
+   *
+   * @param isOpen
+   */
   function toggleSidebar(isOpen) {
     if (!isOpen) {
       closeGeneralSidebar();

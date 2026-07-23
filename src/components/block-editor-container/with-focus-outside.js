@@ -1,10 +1,5 @@
 // @ts-nocheck
 /**
- * External dependencies
- */
-import { includes } from 'lodash';
-
-/**
  * WordPress dependencies
  */
 import { Component } from '@wordpress/element';
@@ -16,7 +11,7 @@ import { createHigherOrderComponent } from '@wordpress/compose';
  *
  * @type {string[]}
  */
-const INPUT_BUTTON_TYPES = [ 'button', 'submit' ];
+const INPUT_BUTTON_TYPES = ['button', 'submit'];
 
 /**
  * Returns true if the given element is a button element subject to focus
@@ -26,38 +21,38 @@ const INPUT_BUTTON_TYPES = [ 'button', 'submit' ];
  *
  * @param {Element} element Element to test.
  *
- * @return {boolean} Whether element is a button.
+ * @returns {boolean} Whether element is a button.
  */
-function isFocusNormalizedButton( element ) {
-	switch ( element.nodeName ) {
+function isFocusNormalizedButton(element) {
+	switch (element.nodeName) {
 		case 'A':
 		case 'BUTTON':
 			return true;
 
 		case 'INPUT':
-			return includes( INPUT_BUTTON_TYPES, element.type );
+			return INPUT_BUTTON_TYPES.includes(element.type);
 	}
 
 	return false;
 }
 
-export default createHigherOrderComponent( ( WrappedComponent ) => {
+export default createHigherOrderComponent((WrappedComponent) => {
 	return class extends Component {
 		constructor() {
-			super( ...arguments );
+			super(...arguments);
 
-			this.bindNode = this.bindNode.bind( this );
-			this.cancelBlurCheck = this.cancelBlurCheck.bind( this );
-			this.queueBlurCheck = this.queueBlurCheck.bind( this );
-			this.normalizeButtonFocus = this.normalizeButtonFocus.bind( this );
+			this.bindNode = this.bindNode.bind(this);
+			this.cancelBlurCheck = this.cancelBlurCheck.bind(this);
+			this.queueBlurCheck = this.queueBlurCheck.bind(this);
+			this.normalizeButtonFocus = this.normalizeButtonFocus.bind(this);
 		}
 
 		componentWillUnmount() {
-			clearTimeout( this.blurCheckTimeout );
+			clearTimeout(this.blurCheckTimeout);
 		}
 
-		bindNode( node ) {
-			if ( node ) {
+		bindNode(node) {
+			if (node) {
 				this.node = node;
 			} else {
 				delete this.node;
@@ -65,35 +60,38 @@ export default createHigherOrderComponent( ( WrappedComponent ) => {
 			}
 		}
 
-		queueBlurCheck( event ) {
-			// React does not allow using an event reference asynchronously
-			// due to recycling behavior, except when explicitly persisted.
-			event.persist();
+		queueBlurCheck(event) {
+			// React 17+ no longer pools synthetic events, and `event.persist()`
+			// was removed entirely in React 19, so the event reference can be
+			// used asynchronously below without persisting it first.
 
 			// Skip blur check if clicking button. See `normalizeButtonFocus`.
-			if ( this.preventBlurCheck ) {
+			if (this.preventBlurCheck) {
 				return;
 			}
 
-			this.blurCheckTimeout = setTimeout( () => {
+			this.blurCheckTimeout = setTimeout(() => {
 				// If document is not focused then focus should remain
 				// inside the wrapped component and therefore we cancel
 				// this blur event thereby leaving focus in place.
 				// https://developer.mozilla.org/en-US/docs/Web/API/Document/hasFocus.
-				if ( ! document.hasFocus() ) {
+				if (!document.hasFocus()) {
 					event.preventDefault();
 					return;
 				}
-				if ( 'function' === typeof this.node.handleFocusOutside ) {
-					this.node.handleFocusOutside( event );
+				if ('function' === typeof this.node.handleFocusOutside) {
+					this.node.handleFocusOutside(event);
 				}
-			}, 0 );
+			}, 0);
 		}
 
 		cancelBlurCheck() {
-			clearTimeout( this.blurCheckTimeout );
-			if ( typeof this.node !== 'undefined' && 'function' === typeof this.node.handleFocus ) {
-				this.node.handleFocus( event );
+			clearTimeout(this.blurCheckTimeout);
+			if (
+				typeof this.node !== 'undefined' &&
+				'function' === typeof this.node.handleFocus
+			) {
+				this.node.handleFocus(event);
 			}
 		}
 
@@ -108,14 +106,14 @@ export default createHigherOrderComponent( ( WrappedComponent ) => {
 		 *
 		 * @param {MouseEvent} event Event for mousedown or mouseup.
 		 */
-		normalizeButtonFocus( event ) {
+		normalizeButtonFocus(event) {
 			const { type, target } = event;
 
-			const isInteractionEnd = includes( [ 'mouseup', 'touchend' ], type );
+			const isInteractionEnd = ['mouseup', 'touchend'].includes(type);
 
-			if ( isInteractionEnd ) {
+			if (isInteractionEnd) {
 				this.preventBlurCheck = false;
-			} else if ( isFocusNormalizedButton( target ) ) {
+			} else if (isFocusNormalizedButton(target)) {
 				this.preventBlurCheck = true;
 			}
 		}
@@ -127,17 +125,17 @@ export default createHigherOrderComponent( ( WrappedComponent ) => {
 			/* eslint-disable jsx-a11y/no-static-element-interactions */
 			return (
 				<div
-					onFocus={ this.cancelBlurCheck }
-					onMouseDown={ this.normalizeButtonFocus }
-					onMouseUp={ this.normalizeButtonFocus }
-					onTouchStart={ this.normalizeButtonFocus }
-					onTouchEnd={ this.normalizeButtonFocus }
-					onBlur={ this.queueBlurCheck }
+					onFocus={this.cancelBlurCheck}
+					onMouseDown={this.normalizeButtonFocus}
+					onMouseUp={this.normalizeButtonFocus}
+					onTouchStart={this.normalizeButtonFocus}
+					onTouchEnd={this.normalizeButtonFocus}
+					onBlur={this.queueBlurCheck}
 				>
-					<WrappedComponent ref={ this.bindNode } { ...this.props } />
+					<WrappedComponent ref={this.bindNode} {...this.props} />
 				</div>
 			);
 			/* eslint-enable jsx-a11y/no-static-element-interactions */
 		}
 	};
-}, 'withFocusOutside' );
+}, 'withFocusOutside');

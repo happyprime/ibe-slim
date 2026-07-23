@@ -20,6 +20,16 @@ var _excluded = ["as", "scope", "identifier", "icon", "selectedIcon", "name"];
 /**
  * WordPress dependencies
  */
+/**
+ *
+ * @param root0
+ * @param root0.as
+ * @param root0.scope
+ * @param root0.identifier
+ * @param root0.icon
+ * @param root0.selectedIcon
+ * @param root0.name
+ */
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { (0, _defineProperty2["default"])(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function ComplementaryAreaToggle(_ref) {

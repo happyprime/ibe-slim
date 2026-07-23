@@ -41,7 +41,7 @@ var TOGGLE_PROPS = {
 /**
  * More menu
  *
- * @param {Object} props - Component props
+ * @param {object} props - Component props
  * @param {BlockEditorSettings} props.settings - Settings
  * @param {OnClose} props.onClick
  * @param {OnMore} props.renderMoreMenu

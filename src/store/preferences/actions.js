@@ -4,7 +4,7 @@ const actions = {
 	 *
 	 * @param {string} feature - Feature name
 	 */
-	toggleFeature( feature ) {
+	toggleFeature(feature) {
 		return {
 			type: 'TOGGLE_FEATURE',
 			feature,

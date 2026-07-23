@@ -7,9 +7,9 @@ exports.isFeatureActive = isFeatureActive;
 /**
  * Is the feature active?
  *
- * @param {Object} state - Current state
+ * @param {object} state - Current state
  * @param {string} feature - Feature name
- * @param {boolean} [defaultValue=false] - Default value
+ * @param {boolean} [defaultValue] - Default value
  */
 function isFeatureActive(state, feature) {
   var defaultValue = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;

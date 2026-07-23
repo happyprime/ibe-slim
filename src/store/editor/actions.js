@@ -14,7 +14,7 @@ const actions = {
 	 *
 	 * @param {boolean} isReady
 	 */
-	setReady( isReady ) {
+	setReady(isReady) {
 		return {
 			type: 'SET_EDITOR_READY',
 			isReady,
@@ -25,7 +25,7 @@ const actions = {
 	 *
 	 * @param {EditorMode} editorMode Editor mode
 	 */
-	setEditorMode( editorMode ) {
+	setEditorMode(editorMode) {
 		return {
 			type: 'SET_EDITOR_MODE',
 			editorMode,
@@ -36,7 +36,7 @@ const actions = {
 	 *
 	 * @param {BlockEditorSettings} settings
 	 */
-	setupEditor( settings ) {
+	setupEditor(settings) {
 		return {
 			type: 'SETUP_EDITOR',
 			settings,
@@ -47,7 +47,7 @@ const actions = {
 	 *
 	 * @param {string} pattern Pattern name
 	 */
-	setCurrentPattern( pattern ) {
+	setCurrentPattern(pattern) {
 		return {
 			type: 'SET_CURRENT_PATTERN',
 			pattern,
@@ -58,7 +58,7 @@ const actions = {
 	 *
 	 * @param {boolean} isOpen
 	 */
-	setIsInserterOpened( isOpen ) {
+	setIsInserterOpened(isOpen) {
 		return {
 			type: 'SET_INSERTER_OPEN',
 			isOpen,
@@ -69,7 +69,7 @@ const actions = {
 	 *
 	 * @param {string} deviceType 'Mobile', 'Desktop', or 'Tablet'
 	 */
-	setDeviceType( deviceType ) {
+	setDeviceType(deviceType) {
 		return {
 			type: 'SET_DEVICE_TYPE',
 			deviceType,
@@ -80,7 +80,7 @@ const actions = {
 	 *
 	 * @param {string} canvasStyles
 	 */
-	setCanvasStyles( canvasStyles ) {
+	setCanvasStyles(canvasStyles) {
 		return {
 			type: 'SET_CANVAS_STYLES',
 			canvasStyles,
@@ -91,7 +91,7 @@ const actions = {
 	 *
 	 * @param {boolean} isIframePreview
 	 */
-	setIsIframePreview( isIframePreview ) {
+	setIsIframePreview(isIframePreview) {
 		return {
 			type: 'SET_IFRAME_PREVIEW',
 			isIframePreview,
@@ -102,7 +102,7 @@ const actions = {
 	 *
 	 * @param {boolean} isEditing
 	 */
-	setEditing( isEditing ) {
+	setEditing(isEditing) {
 		return {
 			type: 'SET_EDITING',
 			isEditing,
@@ -113,21 +113,30 @@ const actions = {
 	 *
 	 * @param {string} name Name of sidebar section
 	 */
-	*openGeneralSidebar( name ) {
-		yield controls.dispatch( interfaceStore, 'enableComplementaryArea', 'isolated/editor', name );
+	*openGeneralSidebar(name) {
+		yield controls.dispatch(
+			interfaceStore,
+			'enableComplementaryArea',
+			'isolated/editor',
+			name
+		);
 	},
 	/**
 	 * Close the sidebar (or popover)
 	 */
 	*closeGeneralSidebar() {
-		yield controls.dispatch( interfaceStore, 'disableComplementaryArea', 'isolated/editor' );
+		yield controls.dispatch(
+			interfaceStore,
+			'disableComplementaryArea',
+			'isolated/editor'
+		);
 	},
 	/**
 	 * Set the status of the listview sidebar section
 	 *
 	 * @param {boolean} isOpen
 	 */
-	setIsListViewOpened( isOpen ) {
+	setIsListViewOpened(isOpen) {
 		return {
 			type: 'SET_LISTVIEW_OPEN',
 			isOpen,

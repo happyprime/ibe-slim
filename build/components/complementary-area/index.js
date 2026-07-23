@@ -19,9 +19,21 @@ var _excluded = ["className", "children", "header", "headerClassName", "toggleSh
 /**
  * Internal dependencies
  */
+/**
+ *
+ * @param area
+ */
 function isActiveArea(area) {
   return ['edit-post/document', 'edit-post/block'].includes(area);
 }
+
+/**
+ *
+ * @param root0
+ * @param root0.scope
+ * @param root0.children
+ * @param root0.className
+ */
 function ComplementaryAreaFill(_ref) {
   var scope = _ref.scope,
     children = _ref.children,
@@ -34,6 +46,19 @@ function ComplementaryAreaFill(_ref) {
     })
   });
 }
+
+/**
+ *
+ * @param root0
+ * @param root0.className
+ * @param root0.children
+ * @param root0.header
+ * @param root0.headerClassName
+ * @param root0.toggleShortcut
+ * @param root0.closeLabel
+ * @param root0.title
+ * @param root0.identifier
+ */
 function ComplementaryArea(_ref2) {
   var className = _ref2.className,
     children = _ref2.children,
@@ -44,7 +69,7 @@ function ComplementaryArea(_ref2) {
     title = _ref2.title,
     identifier = _ref2.identifier,
     props = (0, _objectWithoutProperties2["default"])(_ref2, _excluded);
-  var scope = "isolated/editor";
+  var scope = 'isolated/editor';
   var _useSelect = (0, _data.useSelect)(function (select) {
       // @ts-ignore
       var _select = select(_interface.store),

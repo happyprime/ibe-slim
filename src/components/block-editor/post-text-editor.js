@@ -1,9 +1,4 @@
 /**
- * External dependencies
- */
-import Textarea from 'react-autosize-textarea';
-
-/**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
@@ -13,17 +8,17 @@ import { withInstanceId, compose } from '@wordpress/compose';
 import { parse, serialize } from '@wordpress/blocks';
 
 export class PostTextEditor extends Component {
-	constructor( props ) {
-		super( props );
+	constructor(props) {
+		super(props);
 
-		this.edit = this.edit.bind( this );
-		this.stopEditing = this.stopEditing.bind( this );
+		this.edit = this.edit.bind(this);
+		this.stopEditing = this.stopEditing.bind(this);
 
 		this.state = {};
 	}
 
-	static getDerivedStateFromProps( props, state ) {
-		if ( state.isDirty ) {
+	static getDerivedStateFromProps(props, state) {
+		if (state.isDirty) {
 			return null;
 		}
 
@@ -44,11 +39,11 @@ export class PostTextEditor extends Component {
 	 *
 	 * @param {Event} event Change event.
 	 */
-	edit( event ) {
+	edit(event) {
 		// @ts-ignore */}
 		const value = event.target.value;
-		this.props.onChange( value );
-		this.setState( { value, isDirty: true } );
+		this.props.onChange(value);
+		this.setState({ value, isDirty: true });
 	}
 
 	/**
@@ -57,9 +52,9 @@ export class PostTextEditor extends Component {
 	 * callback and resetting dirty state.
 	 */
 	stopEditing() {
-		if ( this.state.isDirty ) {
-			this.props.onPersist( this.state.value );
-			this.setState( { isDirty: false } );
+		if (this.state.isDirty) {
+			this.props.onPersist(this.state.value);
+			this.setState({ isDirty: false });
 		}
 	}
 
@@ -68,19 +63,22 @@ export class PostTextEditor extends Component {
 		const { instanceId } = this.props;
 		return (
 			<>
-				<label htmlFor={ `post-content-${ instanceId }` } className="screen-reader-text">
-					{ __( 'Type text or HTML' ) }
+				<label
+					htmlFor={`post-content-${instanceId}`}
+					className="screen-reader-text"
+				>
+					{__('Type text or HTML')}
 				</label>
-				<Textarea
+				<textarea
 					autoComplete="off"
 					dir="auto"
-					value={ value }
+					value={value}
 					// @ts-ignore */}
-					onChange={ this.edit }
-					onBlur={ this.stopEditing }
+					onChange={this.edit}
+					onBlur={this.stopEditing}
 					className="editor-post-text-editor"
-					id={ `post-content-${ instanceId }` }
-					placeholder={ __( 'Start writing with text or HTML' ) }
+					id={`post-content-${instanceId}`}
+					placeholder={__('Start writing with text or HTML')}
 				/>
 			</>
 		);
@@ -88,25 +86,25 @@ export class PostTextEditor extends Component {
 }
 
 // @ts-ignore
-export default compose( [
-	withSelect( ( select ) => {
-		const { getBlocks } = select( 'isolated/editor' );
+export default compose([
+	withSelect((select) => {
+		const { getBlocks } = select('isolated/editor');
 		return {
-			value: serialize( getBlocks() ),
+			value: serialize(getBlocks()),
 		};
-	} ),
-	withDispatch( ( dispatch ) => {
-		const { updateBlocksWithoutUndo } = dispatch( 'isolated/editor' );
+	}),
+	withDispatch((dispatch) => {
+		const { updateBlocksWithoutUndo } = dispatch('isolated/editor');
 		return {
-			onChange( content ) {
-				const blocks = parse( content );
-				updateBlocksWithoutUndo( blocks );
+			onChange(content) {
+				const blocks = parse(content);
+				updateBlocksWithoutUndo(blocks);
 			},
-			onPersist( content ) {
-				const blocks = parse( content );
-				updateBlocksWithoutUndo( blocks );
+			onPersist(content) {
+				const blocks = parse(content);
+				updateBlocksWithoutUndo(blocks);
 			},
 		};
-	} ),
+	}),
 	withInstanceId,
-] )( PostTextEditor );
+])(PostTextEditor);

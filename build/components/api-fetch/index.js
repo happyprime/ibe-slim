@@ -10,6 +10,9 @@ var _apiFetch = _interopRequireDefault(require("@wordpress/api-fetch"));
  * WordPress dependencies
  */
 
+/**
+ *
+ */
 function getPost() {
   return {
     body: {
@@ -20,6 +23,9 @@ function getPost() {
 }
 
 // Enough data for Gutenberg to work
+/**
+ *
+ */
 function getTypes() {
   return {
     body: {
@@ -57,6 +63,10 @@ function getTypes() {
 }
 
 // Provide some basic API preloading. This oils the Gutenberg wheels and allows certain operations to happen without making an external request
+/**
+ *
+ * @param options
+ */
 function registerApiHandlers(options) {
   var preload = {
     OPTIONS: {

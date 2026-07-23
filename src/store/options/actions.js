@@ -4,7 +4,7 @@ const actions = {
 	 *
 	 * @param {string} option Option name
 	 */
-	toggleOption( option ) {
+	toggleOption(option) {
 		return {
 			type: 'TOGGLE_OPTION',
 			option,

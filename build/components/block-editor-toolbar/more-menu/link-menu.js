@@ -16,7 +16,7 @@ var _jsxRuntime = require("react/jsx-runtime");
 /**
  * Link menu
  *
- * @param {Object} props - Component props
+ * @param {object} props - Component props
  * @param {BlockEditorSettings} props.settings - Settings
  */function LinkMenu(_ref) {
   var settings = _ref.settings;

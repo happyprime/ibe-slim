@@ -10,32 +10,38 @@ import { useEffect } from '@wordpress/element';
  */
 import storeHotSwapPlugin from '../../store/plugins/store-hot-swap';
 
-function HotSwapper( { isEditing, hotSwap } ) {
-	useEffect( () => {
-		hotSwap( isEditing );
-	}, [ isEditing ] );
+/**
+ *
+ * @param root0
+ * @param root0.isEditing
+ * @param root0.hotSwap
+ */
+function HotSwapper({ isEditing, hotSwap }) {
+	useEffect(() => {
+		hotSwap(isEditing);
+	}, [isEditing]);
 
 	return null;
 }
 
 // @ts-ignore
-export default compose( [
-	withSelect( ( select ) => {
-		const { isEditing } = select( 'isolated/editor' );
+export default compose([
+	withSelect((select) => {
+		const { isEditing } = select('isolated/editor');
 
 		return {
 			isEditing: isEditing(),
 		};
-	} ),
-	withDispatch( ( dispatch, ownProps, { select } ) => {
+	}),
+	withDispatch((dispatch, ownProps, { select }) => {
 		return {
-			hotSwap: ( isEditing ) => {
+			hotSwap: (isEditing) => {
 				storeHotSwapPlugin.resetEditor();
 
-				if ( isEditing ) {
-					storeHotSwapPlugin.setEditor( select, dispatch );
+				if (isEditing) {
+					storeHotSwapPlugin.setEditor(select, dispatch);
 				}
 			},
 		};
-	} ),
-] )( HotSwapper );
+	}),
+])(HotSwapper);

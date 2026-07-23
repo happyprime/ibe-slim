@@ -16,7 +16,7 @@ function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t =
  *
  * @param {{allowBlocks: string[]}} blockSettings - settings for available blocks
  * @param {object[]} allBlockTypes - All available blocks
- * @return {string[]}
+ * @returns {string[]}
  */
 function getAllowedBlockTypes(blockSettings, allBlockTypes) {
   if (blockSettings && blockSettings.allowBlocks && blockSettings.allowBlocks.length > 0) {
@@ -33,7 +33,7 @@ function getAllowedBlockTypes(blockSettings, allBlockTypes) {
  * Get all the disallowed block types, either from the settings, or all available blocks
  *
  * @param {{disallowBlocks: string[]}} blockSettings - settings for disallowed blocks
- * @return {string[]}
+ * @returns {string[]}
  */
 function getDisallowedBlocks(blockSettings) {
   if (blockSettings && blockSettings.disallowBlocks) {
@@ -51,7 +51,7 @@ function getDisallowedBlocks(blockSettings) {
  * @param {IsoSettings} isoSettings
  * @param {object[]} allBlockTypes - All available blocks
  * @param {boolean} fixedToolbar - Do we need a fixed toolbar?
- * @return {EditorSettings}
+ * @returns {EditorSettings}
  */
 function getEditorSettings(editorSettings, isoSettings, allBlockTypes, fixedToolbar) {
   // @ts-ignore

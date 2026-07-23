@@ -12,7 +12,9 @@ var _jsxRuntime = require("react/jsx-runtime");
  * WordPress dependencies
  */
 
-function ListViewOutline() {
+/**
+ *
+ */function ListViewOutline() {
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       className: "editor-list-view-sidebar__outline",

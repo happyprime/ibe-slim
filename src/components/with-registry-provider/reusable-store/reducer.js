@@ -3,17 +3,22 @@
  */
 import { combineReducers } from '@wordpress/data';
 
-export function isEditingReusableBlock( state = {}, action ) {
-	if ( action?.type === 'SET_EDITING_REUSABLE_BLOCK' ) {
+/**
+ *
+ * @param state
+ * @param action
+ */
+export function isEditingReusableBlock(state = {}, action) {
+	if (action?.type === 'SET_EDITING_REUSABLE_BLOCK') {
 		return {
 			...state,
-			[ action.clientId ]: action.isEditing,
+			[action.clientId]: action.isEditing,
 		};
 	}
 
 	return state;
 }
 
-export default combineReducers( {
+export default combineReducers({
 	isEditingReusableBlock,
-} );
+});

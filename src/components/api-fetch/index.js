@@ -4,6 +4,9 @@
 
 import apiFetch from '@wordpress/api-fetch';
 
+/**
+ *
+ */
 function getPost() {
 	return {
 		body: {
@@ -14,6 +17,9 @@ function getPost() {
 }
 
 // Enough data for Gutenberg to work
+/**
+ *
+ */
 function getTypes() {
 	return {
 		body: {
@@ -51,7 +57,11 @@ function getTypes() {
 }
 
 // Provide some basic API preloading. This oils the Gutenberg wheels and allows certain operations to happen without making an external request
-function registerApiHandlers( options ) {
+/**
+ *
+ * @param options
+ */
+function registerApiHandlers(options) {
 	const preload = {
 		OPTIONS: {
 			// Reusable blocks
@@ -66,11 +76,11 @@ function registerApiHandlers( options ) {
 		'/wp/v2/types?context=edit': getTypes(),
 		'/wp/v2/posts/0?context=edit': getPost(),
 		'/wp/v2/posts?context=edit': getPost(),
-		'/wp/v2/templates': () => ( {} ),
-		'/wp/v2/types/post?context=edit': () => ( {} ),
+		'/wp/v2/templates': () => ({}),
+		'/wp/v2/types/post?context=edit': () => ({}),
 	};
 
-	apiFetch.use( apiFetch.createPreloadingMiddleware( preload ) );
+	apiFetch.use(apiFetch.createPreloadingMiddleware(preload));
 }
 
 export default registerApiHandlers;

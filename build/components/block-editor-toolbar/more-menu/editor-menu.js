@@ -27,7 +27,7 @@ var _jsxRuntime = require("react/jsx-runtime");
 /**
  * The 'more menu' editor section
  *
- * @param {Object} props - Component props
+ * @param {object} props - Component props
  * @param {boolean} props.isCodeEditingEnabled
  * @param {string} props.editorMode
  * @param {OnClose} props.onClose - Callback to close the menu

@@ -11,7 +11,7 @@ import FooterSlot from '../footer-slot';
  *
  * The original is not exported, and contains code for post titles
  */
-function TextEditor( {} ) {
+function TextEditor({}) {
 	return (
 		<div className="edit-post-text-editor">
 			<div className="edit-post-text-editor__body">

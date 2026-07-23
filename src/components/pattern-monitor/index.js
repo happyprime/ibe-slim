@@ -24,18 +24,18 @@ import { parse } from '@wordpress/blocks';
  * An initial setup is performed, and is then reset each time the editor is focussed. This ensures we are applying the right
  * settings for this particular editor.
  *
- * @param {Object} props - Component props
+ * @param {object} props - Component props
  * @param {BlockEditorSettings} props.settings - Settings
  * @param {Pattern} props.currentPattern - Currently selected pattern
  * @param {OnUpdate} props.updateBlocksWithoutUndo - Callback to update blocks
  */
-function PatternMonitor( props ) {
+function PatternMonitor(props) {
 	const { currentPattern, updateBlocksWithoutUndo } = props;
-	const previous = useRef( null );
+	const previous = useRef(null);
 
 	// Monitor the current pattern and update the editor content if it changes
-	useEffect( () => {
-		if ( currentPattern === null || previous.current === currentPattern ) {
+	useEffect(() => {
+		if (currentPattern === null || previous.current === currentPattern) {
 			// @ts-ignore
 			previous.current = currentPattern;
 			return;
@@ -43,27 +43,27 @@ function PatternMonitor( props ) {
 
 		// @ts-ignore
 		previous.current = currentPattern.name;
-		setTimeout( () => {
-			updateBlocksWithoutUndo( parse( currentPattern.content ) );
-		}, 0 );
-	}, [ currentPattern ] );
+		setTimeout(() => {
+			updateBlocksWithoutUndo(parse(currentPattern.content));
+		}, 0);
+	}, [currentPattern]);
 
 	return null;
 }
 
-export default compose( [
-	withSelect( ( select ) => {
-		const { getCurrentPattern } = select( 'isolated/editor' );
+export default compose([
+	withSelect((select) => {
+		const { getCurrentPattern } = select('isolated/editor');
 
 		return {
 			currentPattern: getCurrentPattern(),
 		};
-	} ),
-	withDispatch( ( dispatch ) => {
-		const { updateBlocksWithoutUndo } = dispatch( 'isolated/editor' );
+	}),
+	withDispatch((dispatch) => {
+		const { updateBlocksWithoutUndo } = dispatch('isolated/editor');
 
 		return {
 			updateBlocksWithoutUndo,
 		};
-	} ),
-] )( PatternMonitor );
+	}),
+])(PatternMonitor);

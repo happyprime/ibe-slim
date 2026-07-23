@@ -115,7 +115,7 @@ var _excluded = ["children", "onSaveContent", "onSaveBlocks", "__experimentalUnd
  * @typedef SidebarSettings
  * @property {boolean} [inspector=false] - Display the block inspector in a sidebar (true) or popover (false)
  * @property {boolean} [inserter=false] - Display the block inserter in a sidebar (true) or popover (false)
- * @property {function|null} [customComponent] - Function returning a custom sidebar component, or will default to the block inspector
+ * @property {Function | null} [customComponent] - Function returning a custom sidebar component, or will default to the block inspector
  */
 /**
  * Isolated Editor Settings
@@ -133,7 +133,7 @@ var _excluded = ["children", "onSaveContent", "onSaveBlocks", "__experimentalUnd
  * @property {{title: string, url: string}[]} [linkMenu] - Link menu settings
  * @property {string|null} [currentPattern] - The pattern to start with
  * @property {Pattern[]} [patterns] - List of patterns
- * @property {Object} [defaultPreferences] - Default preferences if nothing in localStorage
+ * @property {object} [defaultPreferences] - Default preferences if nothing in localStorage
  * @property {boolean} [allowApi] - Allow API requests
  * @property {boolean} [disableCanvasAnimations] - Disable editor canvas animations
  * @property {SidebarSettings} [sidebar] - Configure sidebar functionality
@@ -150,7 +150,7 @@ var _excluded = ["children", "onSaveContent", "onSaveBlocks", "__experimentalUnd
  *
  * @typedef EditorSettings
  * @property {boolean} hasUploadPermissions
- * @property {Object} allowedMimeTypes
+ * @property {object} allowedMimeTypes
  * @property {string[]} allowedBlockTypes
  * @property {boolean} fixedToolbar
  * @property {boolean} hasFixedToolbar
@@ -165,7 +165,7 @@ var _excluded = ["children", "onSaveContent", "onSaveBlocks", "__experimentalUnd
  * OnSelect callback
  *
  * @callback OnSelect
- * @param {Object} selection - Editor content to save
+ * @param {object} selection - Editor content to save
  */
 /**
  * Initialize Gutenberg
@@ -182,7 +182,7 @@ function initializeEditor() {
   window.isoInitialised = true;
 }
 /**
- * @param {Object} props - Component props
+ * @param {object} props - Component props
  * @param {UndoManager} [props.undoManager]
  */
 function useInitializeIsoEditor() {
@@ -221,7 +221,7 @@ function useInitializeIsoEditor() {
  *
  * @callback OnParse
  * @param {string} content - HTML content
- * @return {object[]}
+ * @returns {object[]}
  */
 
 /**
@@ -230,7 +230,7 @@ function useInitializeIsoEditor() {
  * @callback OnLoad
  * @param {OnParse} parse - Current block parser
  * @param {OnParse} rawHandler - Current raw handler
- * @return {object[]|Promise}
+ * @returns {object[]|Promise}
  */
 
 /**
@@ -245,13 +245,13 @@ function useInitializeIsoEditor() {
  * This wraps up the Gutenberg editor along with a customised store. The contents of the editor are unique, and multiple instances
  * can be created.
  *
- * @param {Object} props - Component props
+ * @param {object} props - Component props
  * @param {OnSaveBlocks} [props.onSaveBlocks] - Save callback
  * @param {OnSaveContent} [props.onSaveContent] - Save callback
  * @param {OnError} props.onError - Error callback
  * @param {OnLoad} [props.onLoad] - Initial blocks
  * @param {BlockEditorSettings} props.settings - Settings
- * @param {Object} [props.children] - Child content
+ * @param {object} [props.children] - Child content
  * @param {string} [props.className] - Additional class name
  * @param {OnMore} [props.renderMoreMenu] - Callback to render additional items in the more menu
  * @param {UndoManager} [props.__experimentalUndoManager] - Undo manager

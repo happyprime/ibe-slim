@@ -1,9 +1,9 @@
-@import '@wordpress/base-styles/_colors';
-@import '@wordpress/base-styles/_variables';
-@import '@wordpress/base-styles/_mixins';
-@import '@wordpress/base-styles/_breakpoints';
-@import '@wordpress/base-styles/_animations';
-@import '@wordpress/base-styles/_z-index';
+@import '@wordpress/base-styles/colors';
+@import '@wordpress/base-styles/variables';
+@import '@wordpress/base-styles/mixins';
+@import '@wordpress/base-styles/breakpoints';
+@import '@wordpress/base-styles/animations';
+@import '@wordpress/base-styles/z-index';
 
 .block-editor-block-navigation__popover {
 	.components-popover__content {

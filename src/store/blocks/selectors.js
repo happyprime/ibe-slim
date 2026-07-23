@@ -6,31 +6,31 @@ import { getEditorMode } from '../editor/selectors';
 /**
  * Get blocks from edit history
  *
- * @param {Object} state - Current state
- * @return {object[]}
+ * @param {object} state - Current state
+ * @returns {object[]}
  */
-export function getBlocks( state ) {
+export function getBlocks(state) {
 	return state.blocks.present.blocks;
 }
 
 /**
  * Get selection
  *
- * @param {Object} state - Current state
- * @return {Object}
+ * @param {object} state - Current state
+ * @returns {object}
  */
-export function getEditorSelection( state ) {
+export function getEditorSelection(state) {
 	return state.blocks.present.selection;
 }
 
 /**
  * Is undo possible?
  *
- * @param {Object} state - Current state
- * @return {boolean}
+ * @param {object} state - Current state
+ * @returns {boolean}
  */
-export function hasEditorUndo( state ) {
-	if ( getEditorMode( state ) !== 'visual' ) return false;
+export function hasEditorUndo(state) {
+	if (getEditorMode(state) !== 'visual') return false;
 
 	return state.blocks.past.length > 0;
 }
@@ -38,11 +38,11 @@ export function hasEditorUndo( state ) {
 /**
  * Is redo possible?
  *
- * @param {Object} state - Current state
- * @return {boolean}
+ * @param {object} state - Current state
+ * @returns {boolean}
  */
-export function hasEditorRedo( state ) {
-	if ( getEditorMode( state ) !== 'visual' ) return false;
+export function hasEditorRedo(state) {
+	if (getEditorMode(state) !== 'visual') return false;
 
 	return state.blocks.future.length > 0;
 }
@@ -50,9 +50,9 @@ export function hasEditorRedo( state ) {
 /**
  * Get current edit count
  *
- * @param {Object} state - Current state
- * @return {number}
+ * @param {object} state - Current state
+ * @returns {number}
  */
-export function getEditCount( state ) {
+export function getEditCount(state) {
 	return state.blocks.present.editCount;
 }
