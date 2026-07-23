@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Replace the three `lodash` usages (`includes`, `flow`) with native JS and drop `lodash` from `dependencies`. Native `Array.prototype.includes` and a small inline composition cover all call sites, and it removes reliance on the deprecated `window.lodash` global.
 - Replace the `is-promise` dependency with a native thenable check (`typeof value.then === 'function'`).
 - Final runtime/bundled dependencies: `@babel/runtime`, `@wordpress/base-styles`, `@wordpress/icons`, `@wordpress/interface`, `classnames`, `redux-undo`.
+- Pin `@wordpress/interface` to exactly `9.4.0`. `@wordpress/interface` >= 9.33 pulls in `@wordpress/admin-ui`, which is bundled by the consumer's `@wordpress/dependency-extraction-webpack-plugin` build; `admin-ui` in turn imports `@wordpress/route` and `@wordpress/theme`, which get externalized to the `wp-route` and `wp-theme` script handles. WordPress core does not register either handle, so the consumer's editor script silently fails to enqueue.
 
 ### Styles
 - Update `@wordpress/base-styles` SCSS imports from the legacy underscore partial form (`@import '@wordpress/base-styles/_mixins'`) to the package's exported subpaths (`@import '@wordpress/base-styles/mixins'`). `@wordpress/base-styles` 10.x adds an `exports` map that the underscore form does not satisfy, which breaks the build under the exports-aware sass-loader in `@wordpress/scripts` 32+. The new form works with old and new base-styles.
